@@ -316,45 +316,8 @@ with tabs[2]:
             "LaTeX mathematical rendering"
         )
 
-    # --------------------------------------------------------
-    # IMPORTANT:
-    # Equation Registry is rendered directly as Markdown.
-    # Streamlit automatically renders:
-    #
-    # \[
-    # equation
-    # \]
-    #
-    # and
-    #
-    # $$
-    # equation
-    # $$
-    #
-    # as LaTeX.
-    # --------------------------------------------------------
-
-    with tabs[2]:
-
-    if language == "HU":
-        st.header("FiRSTT Equation Registry v2")
-        st.caption(
-            "A–H forrásokból rekonstruált egyenletrendszer — "
-            "LaTeX matematikai megjelenítéssel"
-        )
-    else:
-        st.header("FiRSTT Equation Registry v2")
-        st.caption(
-            "Equation system reconstructed from sources A–H — "
-            "LaTeX mathematical rendering"
-        )
-
-    equation_text = load(EQUATION_FILE)
-
-    st.markdown(
-        equation_text
-    )
-
+    
+    
 # ============================================================
 # TAB 4 — SYMBOL REGISTRY
 # ============================================================
