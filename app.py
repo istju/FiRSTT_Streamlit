@@ -1,4 +1,4 @@
-import streamlit as st
+tiimport streamlit as st
 from pathlib import Path
 
 # ============================================================
@@ -54,15 +54,35 @@ def render_latex_markdown(text):
     """
     Markdown + LaTeX renderer.
 
-    A támogatott blokkformák:
+    Támogatott blokkformák:
         \[ ... \]
         $$ ... $$
 
-    Az inline forma:
+    Inline:
         \( ... \)
-
-    A normál Markdown továbbra is st.markdown()-nal jelenik meg.
     """
+    # \[ ... \] → $$ ... $$ blokk
+    text = re.sub(
+        r'\\\[(.*?)\\\]',
+        lambda m: f'\n$$\n{m.group(1).strip()}\n$$\n',
+        text,
+        flags=re.DOTALL
+    )
+
+    # Szétszedjük a $$ ... $$ blokkokra
+    parts = re.split(r'(\$\$.*?\$\$)', text, flags=re.DOTALL)
+
+    for part in parts:
+        part = part.strip()
+        if not part:
+            continue
+
+        if part.startswith("$$") and part.endswith("$$"):
+            equation = part[2:-2].strip()
+            st.latex(equation)
+        else:
+            # Inline \( ... \) maradjon, mert a Streamlit értelmezi
+            st.markdown(part)
 
     # --------------------------------------------------------
     # Normalizáljuk a LaTeX blokkhatárolókat
