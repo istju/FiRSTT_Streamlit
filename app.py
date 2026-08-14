@@ -1,205 +1,80 @@
 import streamlit as st
 from pathlib import Path
 
+
 # ============================================================
-# FiRSTT Streamlit Base v2
-# Maxwell–Quaternion Reconstruction
+# Alapútvonalak
 # ============================================================
 
 BASE = Path(__file__).parent
 DATA = BASE / "data"
 
+
+# ============================================================
+# Streamlit konfiguráció
+# ============================================================
+
 st.set_page_config(
-    page_title="FiRSTT — Maxwell Reconstruction",
+    page_title="FiRSTT — Maxwell rekonstrukció",
     page_icon="∿",
-    layout="wide"
+    layout="wide",
 )
 
 
 # ============================================================
-# LANGUAGE
-# ============================================================
-
-if "language" not in st.session_state:
-    st.session_state.language = "HU"
-
-st.sidebar.header("🌐 Language / Nyelv")
-
-language = st.sidebar.radio(
-    "Válassz nyelvet / Select language:",
-    ["HU", "EN"],
-    index=0 if st.session_state.language == "HU" else 1,
-    horizontal=True
-)
-
-st.session_state.language = language
-
-
-# ============================================================
-# FILE LOADER
+# Dokumentumkezelés
 # ============================================================
 
 def load(name):
-    path = DATA / name
-
-    if not path.exists():
-        return f"⚠️ Dokumentum nem található: `{name}`"
-
-    return path.read_text(encoding="utf-8")
-
-import re
+    """Markdown dokumentum betöltése UTF-8 kódolással."""
+    return (DATA / name).read_text(encoding="utf-8")
 
 
-def render_latex_markdown(text):
+def render_math_markdown(text):
     """
-    Markdown + LaTeX renderer.
+    A registry Markdown fájljaiban használt LaTeX jelölést
+    Streamlit-kompatibilis formára alakítja.
 
-    Támogatott blokkformák:
-        \[ ... \]
-        $$ ... $$
+    Forrás:
+        \\[ ... \\]     ->     $$ ... $$
+        \\( ... \\)     ->     $ ... $
 
-    Inline:
-        \( ... \)
+    A matematikai tartalmat nem módosítja.
+    Csak a megjelenítési delimitereket alakítja át.
     """
-    # \[ ... \] → $$ ... $$ blokk
-    text = re.sub(
-        r'\\\[(.*?)\\\]',
-        lambda m: f'\n$$\n{m.group(1).strip()}\n$$\n',
-        text,
-        flags=re.DOTALL
-    )
 
-    # Szétszedjük a $$ ... $$ blokkokra
-    parts = re.split(r'(\$\$.*?\$\$)', text, flags=re.DOTALL)
+    text = text.replace(r"\[", "$$")
+    text = text.replace(r"\]", "$$")
+    text = text.replace(r"\(", "$")
+    text = text.replace(r"\)", "$")
 
-    for part in parts:
-        part = part.strip()
-        if not part:
-            continue
+    return text
 
-        if part.startswith("$$") and part.endswith("$$"):
-            equation = part[2:-2].strip()
-            st.latex(equation)
-        else:
-            # Inline \( ... \) maradjon, mert a Streamlit értelmezi
-            st.markdown(part)
 
-    # --------------------------------------------------------
-    # Normalizáljuk a LaTeX blokkhatárolókat
-    # --------------------------------------------------------
-
-    # \[ ... \]
-    text = re.sub(
-        r'\\\[(.*?)\\\]',
-        lambda m: f'\n$$\n{m.group(1).strip()}\n$$\n',
-        text,
-        flags=re.DOTALL
-    )
-
-    # --------------------------------------------------------
-    # A dokumentumot $$ ... $$ blokkokra bontjuk
-    # --------------------------------------------------------
-
-    parts = re.split(
-        r'(\$\$.*?\$\$)',
-        text,
-        flags=re.DOTALL
-    )
-
-    for part in parts:
-
-        part = part.strip()
-
-        if not part:
-            continue
-
-        # ----------------------------------------------------
-        # Matematikai blokk
-        # ----------------------------------------------------
-
-        if part.startswith("$$") and part.endswith("$$"):
-
-            equation = part[2:-2].strip()
-
-            st.latex(equation)
-
-        # ----------------------------------------------------
-        # Normál Markdown
-        # ----------------------------------------------------
-
-        else:
-
-            # Inline \( ... \) → $ ... $
-            part = re.sub(
-                r'\\\((.*?)\\\)',
-                r'$\1$',
-                part,
-                flags=re.DOTALL
-            )
-
-            st.markdown(part)
-
-# ============================================================
-# LANGUAGE DEPENDENT FILES
-# ============================================================
-
-if language == "HU":
-
-    MAXWELL_FILE = "maxwell_history.md"
-    EQUATION_FILE = "equation_registry_v2.md"
-    SYMBOL_FILE = "symbol_registry_v2.md"
-
-    PAGE_TITLE = "FiRSTT — Maxwell–kvaternió rekonstrukció"
-
-    APP_CAPTION = (
-        "Kiindulási dokumentáció • történeti háttér • "
-        "jelölési és egyenlet-regiszter"
-    )
-
-    TAB_OVERVIEW = "Áttekintés"
-    TAB_MAXWELL = "Maxwell — történeti háttér"
-    TAB_EQUATIONS = "Egyenletek"
-    TAB_SYMBOLS = "Jelölések"
-    TAB_QUATERNION = "Kvaternió-alap"
-    TAB_SIMULATION = "Szimulációk"
-
-else:
-
-    MAXWELL_FILE = "maxwell_history_en.md"
-    EQUATION_FILE = "equation_registry_v2_en.md"
-    SYMBOL_FILE = "symbol_registry_v2_en.md"
-
-    PAGE_TITLE = "FiRSTT — Maxwell–Quaternion Reconstruction"
-
-    APP_CAPTION = (
-        "Foundational documentation • historical background • "
-        "symbol and equation registry"
-    )
-
-    TAB_OVERVIEW = "Overview"
-    TAB_MAXWELL = "Maxwell — historical background"
-    TAB_EQUATIONS = "Equations"
-    TAB_SYMBOLS = "Symbols"
-    TAB_QUATERNION = "Quaternion foundation"
-    TAB_SIMULATION = "Simulations"
+def render_document(name):
+    """
+    Markdown dokumentum betöltése és Streamlit-kompatibilis
+    matematikai renderelése.
+    """
+    text = load(name)
+    text = render_math_markdown(text)
+    st.markdown(text)
 
 
 # ============================================================
-# HEADER
+# Fejléc
 # ============================================================
 
-st.title(PAGE_TITLE)
-st.caption(APP_CAPTION)
+st.title("FiRSTT — Maxwell–kvaternió rekonstrukció")
+
+st.caption(
+    "Kiindulási dokumentáció • történeti háttér • "
+    "jelölési és egyenlet-regiszter"
+)
 
 
-# ============================================================
-# INTRODUCTION
-# ============================================================
-
-if language == "HU":
-
-    st.markdown(
-        """
+st.markdown(
+    """
 > **Cél:** egyetlen, áttekinthető helyen megmutatni azt a
 > matematikai kiindulási rendszert, amelyből a FiRSTT gondolkodási
 > kerete elindul.
@@ -208,57 +83,38 @@ if language == "HU":
 > A történeti Maxwell-anyag, a rekonstruált matematikai alak és a
 > FiRSTT értelmezési lehetősége külön rétegben jelenik meg.
 """
-    )
-
-else:
-
-    st.markdown(
-        """
-> **Purpose:** to provide a single, structured view of the
-> mathematical starting system from which the FiRSTT conceptual
-> framework emerged.
->
-> This page **does not claim that the FiRSTT hypotheses are proven**.
-> The historical Maxwell material, the reconstructed mathematical
-> form, and the possible FiRSTT interpretations are presented as
-> separate layers.
-"""
-    )
+)
 
 
 # ============================================================
-# TABS
+# Navigáció
 # ============================================================
 
 tabs = st.tabs(
     [
-        TAB_OVERVIEW,
-        TAB_MAXWELL,
-        TAB_EQUATIONS,
-        TAB_SYMBOLS,
-        TAB_QUATERNION,
-        TAB_SIMULATION,
+        "Áttekintés",
+        "Maxwell — történeti háttér",
+        "Egyenletek",
+        "Jelölések",
+        "Kvaternió-alap",
+        "Szimulációk",
     ]
 )
 
 
 # ============================================================
-# TAB 1 — OVERVIEW
+# 1. Áttekintés
 # ============================================================
 
 with tabs[0]:
 
-    if language == "HU":
+    st.header("A kiindulási pont")
 
-        st.header("A kiindulási pont")
-
-        st.markdown(
-            """
+    st.markdown(
+        """
 A projekt jelen dokumentációs rétege nem a teljes FiRSTT-elmélet
-publikálása.
-
-A cél a **kiindulási matematikai rendszer dokumentálása Maxwell
-munkájának tiszteletben tartásával**, valamint annak megmutatása,
+publikálása. A cél a **kiindulási matematikai rendszer dokumentálása**
+Maxwell munkájának tiszteletben tartásával, valamint annak megmutatása,
 hogy a kvaterniós formalizmus milyen további vizsgálati lehetőségeket
 kínálhat.
 
@@ -270,192 +126,84 @@ kínálhat.
 4. **Numerikus / szimulációs réteg** — későbbi vizsgálatok helye.
 
 A mostani Streamlit-verzió szándékosan dokumentációs alap.
-
 A szimulációk helye fenn van tartva, de nincs kész fizikai modellként
 bemutatva.
 """
-        )
-
-    else:
-
-        st.header("The starting point")
-
-        st.markdown(
-            """
-The current documentation layer of the project is not intended to
-publish the complete FiRSTT theory.
-
-Its purpose is to **document the mathematical starting system while
-respecting Maxwell's work**, and to show what further investigative
-possibilities may be offered by a quaternionic formalism.
-
-### Layers
-
-1. **Historical / source layer** — what the sources state and which notation they use.
-2. **Reconstructed mathematical layer** — unified and computable notation.
-3. **FiRSTT interpretation layer** — possible interpretations, not proofs.
-4. **Numerical / simulation layer** — reserved for later investigation.
-
-The current Streamlit version is deliberately a documentation base.
-
-The simulation layer is reserved, but is not presented as a completed
-physical model.
-"""
-        )
+    )
 
 
 # ============================================================
-# TAB 2 — MAXWELL HISTORY
+# 2. Maxwell történeti háttér
 # ============================================================
 
 with tabs[1]:
 
-    st.header(TAB_MAXWELL)
+    st.header("Maxwell — történeti háttér")
 
-    st.markdown(
-        load(MAXWELL_FILE)
-    )
+    render_document("maxwell_history.md")
 
 
 # ============================================================
-# TAB 3 — EQUATION REGISTRY
+# 3. Egyenlet-regiszter
 # ============================================================
 
 with tabs[2]:
 
-    if language == "HU":
-        st.header("FiRSTT Equation Registry v2")
-        st.caption(
-            "A–H forrásokból rekonstruált egyenletrendszer — "
-            "LaTeX matematikai megjelenítéssel"
-        )
-    else:
-        st.header("FiRSTT Equation Registry v2")
-        st.caption(
-            "Equation system reconstructed from sources A–H — "
-            "LaTeX mathematical rendering"
-        )
+    st.header("FiRSTT Equation Registry v2")
 
-    
-    
+    render_document("equation_registry_v2.md")
+
+
 # ============================================================
-# TAB 4 — SYMBOL REGISTRY
+# 4. Jelölési regiszter
 # ============================================================
 
 with tabs[3]:
 
-    st.header(
-        "FiRSTT Symbol Registry v2.0"
-    )
+    st.header("FiRSTT Symbol Registry v2.0")
 
-    st.markdown(
-        load(SYMBOL_FILE)
-    )
+    render_document("symbol_registry_v2.md")
 
 
 # ============================================================
-# TAB 5 — QUATERNION FOUNDATION
+# 5. Kvaternió-alap
 # ============================================================
 
 with tabs[4]:
 
-    if language == "HU":
+    st.header("Kvaternió-alap")
 
-        st.header("Kvaternió-alap")
-
-        st.markdown(
-            r"""
+    st.markdown(
+        r"""
 A dokumentációs alap a Hamilton-féle kvaternió:
 
-\[
-q=w+xi+yj+zk.
-\]
-
-Komponensenként:
-
-\[
-q\leftrightarrow(w,x,y,z).
-\]
+$$
+q = w + xi + yj + zk
+$$
 
 A kvaternió itt **algebrai reprezentáció és számítási eszköz**,
 nem automatikusan fizikai négydimenziós koordinátarendszer.
 
-### Hamilton-féle szorzás
-
-\[
-\begin{aligned}
-w &= w_1w_2-x_1x_2-y_1y_2-z_1z_2,\\
-x &= w_1x_2+x_1w_2+y_1z_2-z_1y_2,\\
-y &= w_1y_2-x_1z_2+y_1w_2+z_1x_2,\\
-z &= w_1z_2+x_1y_2-y_1x_2+z_1w_2.
-\end{aligned}
-\]
-
-A teljes, fejlesztés alatt álló `quaternion_v2.py` külön marad.
-
-Ez az oldal az alapvető matematikai struktúrát dokumentálja;
-nem publikálja a fejlesztés alatt álló teljes numerikus implementációt.
+A teljes, fejlesztés alatt álló `quaternion_v2.py` külön marad;
+ez az oldal csak az alapfogalmakat dokumentálja.
 """
-        )
-
-    else:
-
-        st.header("Quaternion foundation")
-
-        st.markdown(
-            r"""
-The mathematical foundation is the Hamilton quaternion:
-
-\[
-q=w+xi+yj+zk.
-\]
-
-Component representation:
-
-\[
-q\leftrightarrow(w,x,y,z).
-\]
-
-Here the quaternion is treated as an **algebraic representation and
-computational object**, not automatically as a physical four-dimensional
-coordinate system.
-
-### Hamilton product
-
-\[
-\begin{aligned}
-w &= w_1w_2-x_1x_2-y_1y_2-z_1z_2,\\
-x &= w_1x_2+x_1w_2+y_1z_2-z_1y_2,\\
-y &= w_1y_2-x_1z_2+y_1w_2+z_1x_2,\\
-z &= w_1z_2+x_1y_2-y_1x_2+z_1w_2.
-\end{aligned}
-\]
-
-The complete `quaternion_v2.py` implementation under development
-remains separate.
-
-This page documents the fundamental mathematical structure without
-publishing the complete experimental numerical implementation.
-"""
-        )
+    )
 
 
 # ============================================================
-# TAB 6 — SIMULATION LAB
+# 6. Szimulációs labor
 # ============================================================
 
 with tabs[5]:
 
-    if language == "HU":
+    st.header("Szimulációs labor — fenntartott hely")
 
-        st.header("Szimulációs labor — fenntartott hely")
+    st.info(
+        "A szimulációs modul ebben a verzióban szándékosan nincs implementálva."
+    )
 
-        st.info(
-            "A szimulációs modul ebben a verzióban szándékosan nincs implementálva."
-        )
-
-        st.markdown(
-            """
+    st.markdown(
+        """
 Ide kerülhetnek később:
 
 - kvaterniómezők,
@@ -463,86 +211,23 @@ Ide kerülhetnek később:
 - nemkommutatív műveletek,
 - torziós konstrukciók,
 - 3D vektor- és mezőábrázolás,
-- a rekonstruált egyenletrendszer numerikus tesztjei,
-- interaktív paraméterezés.
+- a rekonstruált egyenletrendszer numerikus tesztjei.
 
-### Fontos
-
-A szimulációs réteg **demonstrációs / kutatási eszköz**.
-
-Egy numerikus demonstráció önmagában nem fizikai bizonyítás.
-"""
-        )
-
-    else:
-
-        st.header("Simulation laboratory — reserved")
-
-        st.info(
-            "The simulation module is intentionally not implemented in this version."
-        )
-
-        st.markdown(
-            """
-Future modules may include:
-
-- quaternion fields,
-- component analysis,
-- non-commutative operations,
-- torsion constructions,
-- 3D vector and field visualization,
-- numerical tests of the reconstructed equation system,
-- interactive parameter exploration.
-
-### Important
-
-The simulation layer is a **demonstration / research tool**.
-
-A numerical demonstration by itself does not constitute physical proof.
-"""
-        )
-
-
-# ============================================================
-# SIDEBAR
-# ============================================================
-
-st.sidebar.markdown("---")
-
-if language == "HU":
-
-    st.sidebar.header("FiRSTT Streamlit Base v2")
-
-    st.sidebar.markdown(
-        """
-**Dokumentációs alap**
-
-- Maxwell történeti háttér
-- Equation Registry v2
-- Symbol Registry v2
-- kvaternió-alap
-- fenntartott szimulációs labor
+**Egy numerikus demonstráció önmagában nem fizikai bizonyítás.**
 """
     )
 
-else:
 
-    st.sidebar.header("FiRSTT Streamlit Base v2")
+# ============================================================
+# Oldalsáv
+# ============================================================
 
-    st.sidebar.markdown(
-        """
-**Documentation foundation**
+st.sidebar.header("FiRSTT Streamlit Base v2")
 
-- Maxwell historical background
-- Equation Registry v2
-- Symbol Registry v2
-- quaternion foundation
-- reserved simulation laboratory
+st.sidebar.markdown(
+    """
+Maxwell történeti háttér • Equation Registry •
+Symbol Registry • kvaternió-alap •
+fenntartott szimulációs labor
 """
-    )
-
-st.sidebar.markdown("---")
-
-st.sidebar.caption(
-    "FiRSTT — Foundational Mathematical Documentation"
 )
