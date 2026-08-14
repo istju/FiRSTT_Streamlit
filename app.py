@@ -47,6 +47,77 @@ def load(name):
 
     return path.read_text(encoding="utf-8")
 
+import re
+
+
+def render_latex_markdown(text):
+    """
+    Markdown + LaTeX renderer.
+
+    A támogatott blokkformák:
+        \[ ... \]
+        $$ ... $$
+
+    Az inline forma:
+        \( ... \)
+
+    A normál Markdown továbbra is st.markdown()-nal jelenik meg.
+    """
+
+    # --------------------------------------------------------
+    # Normalizáljuk a LaTeX blokkhatárolókat
+    # --------------------------------------------------------
+
+    # \[ ... \]
+    text = re.sub(
+        r'\\\[(.*?)\\\]',
+        lambda m: f'\n$$\n{m.group(1).strip()}\n$$\n',
+        text,
+        flags=re.DOTALL
+    )
+
+    # --------------------------------------------------------
+    # A dokumentumot $$ ... $$ blokkokra bontjuk
+    # --------------------------------------------------------
+
+    parts = re.split(
+        r'(\$\$.*?\$\$)',
+        text,
+        flags=re.DOTALL
+    )
+
+    for part in parts:
+
+        part = part.strip()
+
+        if not part:
+            continue
+
+        # ----------------------------------------------------
+        # Matematikai blokk
+        # ----------------------------------------------------
+
+        if part.startswith("$$") and part.endswith("$$"):
+
+            equation = part[2:-2].strip()
+
+            st.latex(equation)
+
+        # ----------------------------------------------------
+        # Normál Markdown
+        # ----------------------------------------------------
+
+        else:
+
+            # Inline \( ... \) → $ ... $
+            part = re.sub(
+                r'\\\((.*?)\\\)',
+                r'$\1$',
+                part,
+                flags=re.DOTALL
+            )
+
+            st.markdown(part)
 
 # ============================================================
 # LANGUAGE DEPENDENT FILES
@@ -263,12 +334,26 @@ with tabs[2]:
     # as LaTeX.
     # --------------------------------------------------------
 
+    with tabs[2]:
+
+    if language == "HU":
+        st.header("FiRSTT Equation Registry v2")
+        st.caption(
+            "A–H forrásokból rekonstruált egyenletrendszer — "
+            "LaTeX matematikai megjelenítéssel"
+        )
+    else:
+        st.header("FiRSTT Equation Registry v2")
+        st.caption(
+            "Equation system reconstructed from sources A–H — "
+            "LaTeX mathematical rendering"
+        )
+
     equation_text = load(EQUATION_FILE)
 
     st.markdown(
         equation_text
     )
-
 
 # ============================================================
 # TAB 4 — SYMBOL REGISTRY
