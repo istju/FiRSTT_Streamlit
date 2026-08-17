@@ -158,8 +158,281 @@ def page_home() -> None:
 
 def page_symbols() -> None:
     st.header(t("nav_symbols"))
-    content = load_markdown(SYMBOL_REGISTRY_PATH)
-    st.markdown(content, unsafe_allow_html=False)
+    st.caption(
+        "Layered notation: **SOURCE** → **RECONSTRUCTED / UNIFIED** → **FiRSTT INTERPRETATION**. "
+        "Collisions are resolved by representation layers, not by silent renaming."
+    )
+
+    # ------------------------------------------------------------------
+    # 1. Quaternion convention
+    # ------------------------------------------------------------------
+    with st.expander("1. Quaternion convention (standard mathematics)", expanded=False):
+        st.markdown("**Block ID:** `SYM-QUAT-STD`")
+        st.markdown("Classical Hamilton form:")
+        st.latex(r"q = w + xi + yj + zk")
+        st.markdown(
+            """
+| Mathematical component | Python attribute |
+|------------------------|------------------|
+| scalar part            | `w`              |
+| \( i \)-component          | `x`              |
+| \( j \)-component          | `y`              |
+| \( k \)-component          | `z`              |
+| vector part            | `(x, y, z)`      |
+"""
+        )
+        st.info("This is **standard mathematics**, not FiRSTT-specific.")
+
+    # ------------------------------------------------------------------
+    # 2. Differential operator
+    # ------------------------------------------------------------------
+    with st.expander("2. Differential operator", expanded=False):
+        st.markdown("**Block ID:** `SYM-NABLA`")
+        st.markdown("Source form:")
+        st.latex(
+            r"\nabla = \mathbf{i}\frac{\partial}{\partial x} + \mathbf{j}\frac{\partial}{\partial y} + \mathbf{k}\frac{\partial}{\partial z}"
+        )
+        st.markdown("Related operator forms:")
+        st.latex(
+            r"\nabla\times\mathbf{A},\quad \nabla\times\mathbf{H},\quad \nabla\cdot\mathbf{D},\quad \nabla\cdot\mathbf{J}_{\mathrm{total}},\quad \nabla\cdot\mathbf{J}_{\mathrm{conduction}}"
+        )
+
+    # ------------------------------------------------------------------
+    # 3. Fields and potentials
+    # ------------------------------------------------------------------
+    with st.expander("3. Fields and potentials", expanded=False):
+        st.markdown("#### 3.1 Vector potential \( \\mathbf{A} \)")
+        st.markdown("**Block ID:** `SYM-A`")
+        st.markdown(f"**{t('layer_source')}**")
+        st.latex(r"\mathbf{A} = (f, g, h)")
+        st.markdown(f"**{t('layer_reconstructed')}**")
+        st.latex(r"\mathbf{A} = (f_A, g_A, h_A)")
+        st.caption("Streamlit / code: `A_x, A_y, A_z`")
+        st.markdown(f"**{t('layer_firstt')}**")
+        st.markdown("Appears in the magnetic force and electromotive force equations. Any deeper role together with the longitudinal component is hypothesis-level.")
+
+        st.divider()
+        st.markdown("#### 3.2 Scalar potential \( \\Psi \)")
+        st.markdown("**Block ID:** `SYM-PSI`")
+        st.latex(r"\Psi")
+        st.caption("Streamlit / code: `Psi`")
+        st.markdown("\( -\\nabla\\Psi \) appears as a highlighted longitudinal component (hypothesis-level reading).")
+
+        st.divider()
+        st.markdown("#### 3.3 Electric field \( \\mathbf{E} \)")
+        st.markdown("**Block ID:** `SYM-E`")
+        st.latex(r"\mathbf{E} = (P, Q, R)")
+        st.caption("Streamlit / code: `E_x, E_y, E_z`")
+
+        st.divider()
+        st.markdown("#### 3.4 Magnetic field \( \\mathbf{H} \)")
+        st.markdown("**Block ID:** `SYM-H`")
+        st.latex(r"\mathbf{H} = (\alpha, \beta, \gamma)")
+        st.caption("Streamlit / code: `H_x, H_y, H_z`")
+
+    # ------------------------------------------------------------------
+    # 4. Electric displacement D
+    # ------------------------------------------------------------------
+    with st.expander("4. Electric displacement \( \\mathbf{D} \)", expanded=False):
+        st.markdown("**Block ID:** `SYM-D`")
+        st.markdown(f"**{t('layer_source')}**")
+        st.latex(r"\mathbf{D} = (f, g, h)")
+        st.markdown(f"**{t('layer_reconstructed')}**")
+        st.latex(r"\mathbf{D} = (f_D, g_D, h_D)")
+        st.caption("Streamlit / code: `D_x, D_y, D_z`")
+        st.markdown(f"**{t('layer_firstt')}**")
+        st.markdown(
+            "The source material used the same letters \( f,g,h \) for both \( \\mathbf{A} \) and \( \\mathbf{D} \). "
+            "Layered representation resolves the collision for computation and display. "
+            "It does **not** claim that the original identical lettering was intentional."
+        )
+        st.info("**Status:** RESOLVED_BY_REPRESENTATION_LAYER")
+
+    # ------------------------------------------------------------------
+    # 5. Currents
+    # ------------------------------------------------------------------
+    with st.expander("5. Currents", expanded=False):
+        st.markdown("#### 5.1 Conduction current")
+        st.markdown("**Block ID:** `SYM-J-COND`")
+        st.latex(r"\mathbf{J}_{\mathrm{conduction}} = (u, v, w)")
+        st.caption("Streamlit / code: `J_cond_x, J_cond_y, J_cond_z`")
+
+        st.divider()
+        st.markdown("#### 5.2 Total current")
+        st.markdown("**Block ID:** `SYM-J-TOTAL`")
+        st.markdown(f"**{t('layer_source')}**")
+        st.markdown("- Group A: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
+        st.markdown("- Group C: \( \\mathbf{J} = (p, q, r) \) (text identifies it as total current)")
+        st.markdown(f"**{t('layer_reconstructed')}**")
+        st.latex(r"\mathbf{J}_{\mathrm{total}} = (p, q, r)")
+        st.caption("Streamlit / code: `J_total_x, J_total_y, J_total_z`")
+        st.latex(
+            r"p = u + \frac{\partial f}{\partial t},\quad q = v + \frac{\partial g}{\partial t},\quad r = w + \frac{\partial h}{\partial t}"
+        )
+        st.markdown(f"**{t('layer_firstt')}**")
+        st.markdown(
+            "The C-source notation already meant total current. "
+            "In the reconstructed layer the meaning is made explicit as \( \\mathbf{J}_{\\mathrm{total}} \). "
+            "Original source notation is left unchanged."
+        )
+        st.info("**Status:** RESOLVED_BY_REPRESENTATION_LAYER")
+
+    # ------------------------------------------------------------------
+    # 6–8. Charge, parameters, velocity
+    # ------------------------------------------------------------------
+    with st.expander("6–8. Charge density, parameters, velocity", expanded=False):
+        st.markdown("#### Charge density")
+        st.latex(r"\rho_e")
+        st.caption("Streamlit / code: `rho_e`  ·  free charge density")
+
+        st.divider()
+        st.markdown("#### Material parameters")
+        st.markdown(
+            """
+| Symbol | Meaning | Notes |
+|--------|---------|-------|
+| \( \\mu \) | magnetic permeability | |
+| \( k \) | \( k = 1/\\varepsilon \) | used in \( \\mathbf{D} = \\frac{1}{4\\pi k}\\mathbf{E} \) |
+| \( \\rho \) | resistivity | used in \( \\mathbf{E} = \\rho\\,\\mathbf{J}_{\\mathrm{conduction}} \) |
+| \( \\rho_e \) | free charge density | distinct from \( \\rho \) |
+"""
+        )
+        st.caption("Keep `rho` and `rho_e` clearly separated in code and typography.")
+
+        st.divider()
+        st.markdown("#### Velocity vector")
+        st.latex(
+            r"\mathbf{v} = \left( \frac{\partial x}{\partial t},\ \frac{\partial y}{\partial t},\ \frac{\partial z}{\partial t} \right)"
+        )
+        st.latex(
+            r"\mathbf{E} = \mu(\mathbf{v}\times\mathbf{H}) - \frac{\partial\mathbf{A}}{\partial t} - \nabla\Psi"
+        )
+
+    # ------------------------------------------------------------------
+    # 9–10. Coordinates, time, FiRSTT concepts
+    # ------------------------------------------------------------------
+    with st.expander("9–10. Coordinates, time & FiRSTT concepts (hypothesis)", expanded=False):
+        st.markdown("Spatial coordinates: \( x,\\ y,\\ z \)  ·  Time: \( t \)")
+        st.markdown(
+            "**FiRSTT base assumption (hypothesis):** time is treated as primary; "
+            "the theoretical emergence of space from an underlying temporal structure is investigated. "
+            "This is **not** a proven physical fact and **not** a mathematical consequence of the present formalism."
+        )
+        st.markdown(
+            """
+| Concept | Status | Remark |
+|---------|--------|--------|
+| Time as source | Hypothesis | Central project hypothesis |
+| Torsion | Open mathematical definition | Must be defined explicitly later |
+| Spin | Linked to quaternion vector part | Geometric / spin-like structure |
+| Longitudinal component | \( -\\nabla\\Psi \) highlighted | Hypothesis-level reading |
+"""
+        )
+
+    # ------------------------------------------------------------------
+    # 11. Implementation convention — quaternion_v2
+    # ------------------------------------------------------------------
+    with st.expander("11. Implementation convention — quaternion_v2 (four layers)", expanded=True):
+        st.markdown("**Block ID:** `SYM-QUAT-IMPL`")
+        st.markdown("Reference: `quaternion_v2.py` / `src/quaternion.py`")
+
+        st.markdown("#### 11.1 Standard mathematical layer (Hamilton \( \\mathbb{H} \))")
+        st.latex(r"q = w + xi + yj + zk")
+        st.markdown(
+            "Operations: addition, Hamilton product, conjugate, norm, inverse, rotation representation. "
+            "This layer is **not** FiRSTT-specific."
+        )
+
+        st.markdown("#### 11.2 FiRSTT-specific construction — torsion_product")
+        st.latex(
+            r"T_g(q_1,q_2) = q_1q_2 + \frac{g}{2}(q_1q_2 - q_2q_1) = \Bigl(1+\frac{g}{2}\Bigr)q_1q_2 - \frac{g}{2}q_2q_1"
+        )
+        st.markdown(
+            """
+**Mathematical properties** (not interpretation):
+- \( g = 0 \) recovers the standard Hamilton product
+- \( g \\neq 0 \) introduces a non-commutative correction
+- Utilises the commutator-like part of the quaternion product
+
+Registered as: **FiRSTT-specific torsional product construction**.  
+Physical interpretation (spacetime torsion, etc.): **open / hypothesis**.
+"""
+        )
+
+        st.markdown("#### 11.3 Numerical demonstration layer")
+        st.markdown(
+            "`evolve_quaternion_field()` is a **simplified, artificial evolutionary model**. "
+            "It is **not** a Maxwell solver and **not** a derivation of time → space emergence. "
+            "Must be labelled as demonstration / toy model."
+        )
+
+        st.markdown("#### 11.4 FiRSTT physical hypothesis layer")
+        st.markdown(
+            "Primacy of time, emergence of space, and physical relation of `torsion_product` "
+            "to spacetime torsion remain at **hypothesis** level. "
+            "The code treats quaternions as algebraic representation and numerical computational object."
+        )
+
+        st.markdown("#### 11.5 Hierarchy summary")
+        st.code(
+            """
+FiRSTT mathematical system
+│
+├── STANDARD MATHEMATICS
+│   ├── Quaternion algebra (Hamilton ℍ)
+│   └── Numerical representation (NumPy batch)
+│
+├── FiRSTT-SPECIFIC MATHEMATICAL CONSTRUCTION
+│   └── torsion_product T_g(q₁, q₂)
+│
+├── NUMERICAL MODEL (demonstration)
+│   └── evolve_quaternion_field()
+│
+└── FiRSTT PHYSICAL HYPOTHESIS
+    ├── primacy of time
+    ├── emergence of space
+    └── physical interpretation of torsion
+""",
+            language="text",
+        )
+
+    # ------------------------------------------------------------------
+    # 12–13. Summary table & rules
+    # ------------------------------------------------------------------
+    with st.expander("12–13. Summary notation table & registry rules", expanded=False):
+        st.markdown("#### Summary table")
+        st.markdown(
+            """
+| Physical quantity | SOURCE | RECONSTRUCTED / UNIFIED | Streamlit / code |
+|-------------------|--------|--------------------------|------------------|
+| \( \\mathbf{A} \) | \( (f,g,h) \) | \( (f_A,g_A,h_A) \) | `A_x, A_y, A_z` |
+| \( \\mathbf{D} \) | \( (f,g,h) \) | \( (f_D,g_D,h_D) \) | `D_x, D_y, D_z` |
+| \( \\mathbf{J}_{\\mathrm{conduction}} \) | \( (u,v,w) \) | \( (u,v,w) \) | `J_cond_x, …` |
+| \( \\mathbf{J}_{\\mathrm{total}} \) | \( (p,q,r) \) | \( (p,q,r) \) | `J_total_x, …` |
+| \( \\mathbf{E} \) | \( (P,Q,R) \) | \( (P,Q,R) \) | `E_x, E_y, E_z` |
+| \( \\mathbf{H} \) | \( (\\alpha,\\beta,\\gamma) \) | \( (\\alpha,\\beta,\\gamma) \) | `H_x, H_y, H_z` |
+| \( \\Psi \) | \( \\Psi \) | \( \\Psi \) | `Psi` |
+| \( \\rho_e \) | \( \\rho_e \) | \( \\rho_e \) | `rho_e` |
+| \( \\rho \) | \( \\rho \) | \( \\rho \) | `rho` |
+"""
+        )
+        st.markdown("#### Key registry rules")
+        st.markdown(
+            """
+1. Symbol meaning is not changed from chapter to chapter.  
+2. Source collisions are handled by layered representation, not silent renaming.  
+3. SOURCE / RECONSTRUCTED / FiRSTT INTERPRETATION remain strictly separate.  
+4. Standard mathematics and FiRSTT-specific constructions are clearly distinguished.  
+5. The four layers of `quaternion_v2` must not be mixed.  
+6. Simulation placeholders are mathematical illustration only.  
+7. `torsion_product` physical interpretation remains open / hypothesis.
+"""
+        )
+
+    st.divider()
+    with st.expander("Full markdown source (Symbol Registry)", expanded=False):
+        content = load_markdown(SYMBOL_REGISTRY_PATH)
+        st.markdown(content)
 
 
 def page_equations() -> None:
