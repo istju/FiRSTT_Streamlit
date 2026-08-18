@@ -756,6 +756,11 @@ munkásságából és gondolataiból:
 - **Albert Vejnyik**
 - **Kisfaludy György** (Univerzum Egyháza)
 - **Tóth Roland** (LIF Academy)
+- Az idő és a geometria kérdéseit formáló tágabb történeti és fogalmi hatások között
+**Albert Einstein** munkássága (a newtoni abszolút idő meghaladása) és az
+**Einstein–Cartan-elmélet** (a spinhez kapcsolódó téridő-torzió) szintén említést érdemel.
+Ezek a tágabb tudományos kontextus részeként szerepelnek, nem a jelenlegi rekonstrukció
+kísérleti vagy elméleti igazolásaként.
 
 Munkájuk segített formálni a projektben vizsgált kérdéseket és irányokat.
 
@@ -783,7 +788,11 @@ and ideas of:
 - **Albert Veĭnik**
 - **György Kisfaludy** (Univerzum Egyháza)
 - **Roland Tóth** (LIF Academy)
-
+- Among the broader historical and conceptual influences that shaped questions about
+time and geometry, the work of **Albert Einstein** (the move beyond Newtonian absolute time)
+and the **Einstein–Cartan theory** (spacetime torsion linked to spin) are also acknowledged.
+These are recorded as part of the wider scientific context, not as experimental or
+theoretical validation of the present reconstruction.
 Their contributions helped shape questions and directions explored in this project.
 
 The present layered reconstruction of Maxwell’s equations
