@@ -741,31 +741,90 @@ def page_sources() -> None:
     st.markdown(t("sources_intro"))
 
     st.subheader(t("sources_thanks"))
-    st.markdown(
-        """
-        - Collaborative clarification of the A–H source notation and the layered representation scheme.  
-        - Review and precise boundary-setting between standard Hamilton quaternion algebra,  
-          the FiRSTT-specific `torsion_product` construction, numerical demonstration code,  
-          and physical hypothesis (Arcsi and project discussions).  
-        - All contributors who helped keep SOURCE, RECONSTRUCTED and FiRSTT INTERPRETATION layers distinct.
-        """
-    )
+
+    lang = st.session_state.get("lang", "en")
+
+    if lang == "hu":
+        st.markdown(
+            """
+A jelen rekonstrukció és a tágabb FiRSTT keret inspirációt merített a következő személyek
+munkásságából és gondolataiból:
+
+- **Nyikolaj Kozirev**
+- **Anatolij Akimov**
+- **Gennagyij Sipov**
+- **Albert Vejnyik**
+- **Kisfaludy György** (Univerzum Egyháza)
+- **Tóth Roland** (LIF Academy)
+
+Munkájuk segített formálni a projektben vizsgált kérdéseket és irányokat.
+
+A Maxwell-egyenletek rétegezett rekonstrukciója
+(FORRÁS → REKONSTRUÁLT → FiRSTT ÉRTELMEZÉS) önálló matematikai és fogalmi munka;
+nem állítja a fenti szerzők támogatását, és nem kísérleti igazolásként jelenik meg.
+"""
+        )
+        st.markdown(
+            """
+További köszönet illeti azokat, akik a jelölési rétegek (FORRÁS / REKONSTRUÁLT / FiRSTT)
+szigorú elválasztásában és a kvaternió-algebrai határok tisztázásában segítettek
+(köztük Arcsi és a projekt beszélgetései).
+"""
+        )
+    else:
+        st.markdown(
+            """
+This reconstruction and the broader FiRSTT framework draw inspiration from the work
+and ideas of:
+
+- **Nikolai Kozyrev**
+- **Anatoly Akimov**
+- **Gennady Shipov**
+- **Albert Veĭnik**
+- **György Kisfaludy** (Univerzum Egyháza)
+- **Roland Tóth** (LIF Academy)
+
+Their contributions helped shape questions and directions explored in this project.
+
+The present layered reconstruction of Maxwell’s equations
+(SOURCE → RECONSTRUCTED → FiRSTT INTERPRETATION) remains an independent mathematical
+and conceptual effort; it does not claim endorsement by the above authors,
+nor does it present experimental validation.
+"""
+        )
+        st.markdown(
+            """
+Additional thanks go to those who helped keep the notation layers
+(SOURCE / RECONSTRUCTED / FiRSTT) strictly separate and who clarified the boundaries
+of the quaternion algebra (including Arcsi and project discussions).
+"""
+        )
 
     st.subheader(t("sources_links"))
-    st.markdown(
-        """
-        *Placeholder list – replace with real references later:*
+    if lang == "hu":
+        st.markdown(
+            """
+*Hivatkozási lista – később bővíthető:*
 
-        - Maxwell’s original papers / treatises (links to be added)  
-        - Historical secondary literature on the development of the field equations  
-        - Quaternion algebra references (Hamilton)  
-        - Project-internal A–H source files (not public)  
-        - Future publications or preprints of the FiRSTT framework  
+- Maxwell eredeti dolgozatai / értekezései  
+- Történeti szakirodalom az elektromágneses téregyenletek fejlődéséről  
+- Kvaternió-algebra (Hamilton)  
+- Projekt-belső A–H forrásfájlok (nem nyilvánosak)  
+- A FiRSTT keret későbbi publikációi / preprintjei  
+"""
+        )
+    else:
+        st.markdown(
+            """
+*Reference list – to be expanded later:*
 
-        You can edit this section directly in `app.py` or move the content into a dedicated  
-        `data/sources.md` file when the reference list grows.
-        """
-    )
+- Maxwell’s original papers / treatises  
+- Historical secondary literature on the development of the field equations  
+- Quaternion algebra (Hamilton)  
+- Project-internal A–H source files (not public)  
+- Future publications or preprints of the FiRSTT framework  
+"""
+        )
 
 
 # ---------------------------------------------------------------------------
