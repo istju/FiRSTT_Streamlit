@@ -1,4 +1,4 @@
-"""
+hi"""
 FiRSTT Streamlit Base v2
 ========================
 Maxwell reconstruction interface with clean layered notation,
@@ -111,24 +111,47 @@ def load_markdown(path: Path) -> str:
 
 
 def inject_theme_css(theme: str) -> None:
+def inject_theme_css(theme: str) -> None:
     """Stronger CSS override so the in-app Light/Dark toggle actually works
     even when the browser or OS prefers the opposite scheme.
+    Also styles the sidebar collapse control so it stays visible.
     """
     if theme == "dark":
         css = """
         <style>
-        /* Force dark palette */
+        /* ===== DARK ===== */
         html, body, [data-testid="stAppViewContainer"],
         .stApp, .main, .block-container {
             background-color: #0e1117 !important;
             color: #fafafa !important;
         }
-        div[data-testid="stSidebar"] {
+
+        /* Sidebar */
+        section[data-testid="stSidebar"],
+        div[data-testid="stSidebar"],
+        div[data-testid="stSidebar"] > div {
             background-color: #1a1d24 !important;
         }
+        section[data-testid="stSidebar"] *,
         div[data-testid="stSidebar"] * {
-            color: #e0e0e0 !important;
+            color: #e8e8e8 !important;
         }
+
+        /* Collapse / expand control (the little tab) */
+        button[kind="header"],
+        [data-testid="collapsedControl"],
+        [data-testid="stSidebarCollapsedControl"],
+        div[data-testid="stSidebarCollapsedControl"] {
+            background-color: #1a1d24 !important;
+            color: #e8e8e8 !important;
+            border: 1px solid #444 !important;
+        }
+        [data-testid="collapsedControl"] svg,
+        [data-testid="stSidebarCollapsedControl"] svg {
+            fill: #e8e8e8 !important;
+            stroke: #e8e8e8 !important;
+        }
+
         h1, h2, h3, h4, h5, h6, p, label, span, li {
             color: #fafafa !important;
         }
@@ -139,27 +162,48 @@ def inject_theme_css(theme: str) -> None:
             background-color: #1a1d24 !important;
             border-color: #333 !important;
         }
-        hr {
-            border-color: #333 !important;
-        }
+        hr { border-color: #333 !important; }
         .block-container { padding-top: 1.5rem; }
         </style>
         """
     else:
         css = """
         <style>
-        /* Force light palette */
+        /* ===== LIGHT ===== */
         html, body, [data-testid="stAppViewContainer"],
         .stApp, .main, .block-container {
             background-color: #ffffff !important;
             color: #111111 !important;
         }
-        div[data-testid="stSidebar"] {
+
+        /* Sidebar – force light grey, not black */
+        section[data-testid="stSidebar"],
+        div[data-testid="stSidebar"],
+        div[data-testid="stSidebar"] > div,
+        section[data-testid="stSidebar"] > div {
             background-color: #f0f2f6 !important;
+            background-image: none !important;
         }
+        section[data-testid="stSidebar"] *,
         div[data-testid="stSidebar"] * {
             color: #111111 !important;
         }
+
+        /* Collapse / expand control (the little tab) */
+        button[kind="header"],
+        [data-testid="collapsedControl"],
+        [data-testid="stSidebarCollapsedControl"],
+        div[data-testid="stSidebarCollapsedControl"] {
+            background-color: #f0f2f6 !important;
+            color: #111111 !important;
+            border: 1px solid #ccc !important;
+        }
+        [data-testid="collapsedControl"] svg,
+        [data-testid="stSidebarCollapsedControl"] svg {
+            fill: #111111 !important;
+            stroke: #111111 !important;
+        }
+
         h1, h2, h3, h4, h5, h6, p, label, span, li {
             color: #111111 !important;
         }
@@ -170,9 +214,7 @@ def inject_theme_css(theme: str) -> None:
             background-color: #ffffff !important;
             border-color: #ddd !important;
         }
-        hr {
-            border-color: #ddd !important;
-        }
+        hr { border-color: #ddd !important; }
         .block-container { padding-top: 1.5rem; }
         </style>
         """
