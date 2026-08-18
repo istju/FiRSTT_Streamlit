@@ -114,7 +114,7 @@ def load_markdown(path: Path) -> str:
 def inject_theme_css(theme: str) -> None:
     """Stronger CSS override so the in-app Light/Dark toggle actually works
     even when the browser or OS prefers the opposite scheme.
-    Also styles the sidebar collapse control so it stays visible.
+    Also styles the sidebar collapse control and the top header bar.
     """
     if theme == "dark":
         css = """
@@ -124,6 +124,17 @@ def inject_theme_css(theme: str) -> None:
         .stApp, .main, .block-container {
             background-color: #0e1117 !important;
             color: #fafafa !important;
+        }
+
+        /* Header bar */
+        header[data-testid="stHeader"],
+        div[data-testid="stHeader"] {
+            background-color: #0e1117 !important;
+        }
+        header[data-testid="stHeader"] *,
+        div[data-testid="stHeader"] * {
+            color: #e8e8e8 !important;
+            fill: #e8e8e8 !important;
         }
 
         /* Sidebar */
@@ -137,7 +148,7 @@ def inject_theme_css(theme: str) -> None:
             color: #e8e8e8 !important;
         }
 
-        /* Collapse / expand control (the little tab) */
+        /* Collapse / expand control */
         button[kind="header"],
         [data-testid="collapsedControl"],
         [data-testid="stSidebarCollapsedControl"],
@@ -147,9 +158,11 @@ def inject_theme_css(theme: str) -> None:
             border: 1px solid #444 !important;
         }
         [data-testid="collapsedControl"] svg,
-        [data-testid="stSidebarCollapsedControl"] svg {
+        [data-testid="stSidebarCollapsedControl"] svg,
+        header svg, [data-testid="stHeader"] svg {
             fill: #e8e8e8 !important;
             stroke: #e8e8e8 !important;
+            color: #e8e8e8 !important;
         }
 
         h1, h2, h3, h4, h5, h6, p, label, span, li {
@@ -176,7 +189,18 @@ def inject_theme_css(theme: str) -> None:
             color: #111111 !important;
         }
 
-        /* Sidebar – force light grey, not black */
+        /* Header bar */
+        header[data-testid="stHeader"],
+        div[data-testid="stHeader"] {
+            background-color: #ffffff !important;
+        }
+        header[data-testid="stHeader"] *,
+        div[data-testid="stHeader"] * {
+            color: #111111 !important;
+            fill: #111111 !important;
+        }
+
+        /* Sidebar */
         section[data-testid="stSidebar"],
         div[data-testid="stSidebar"],
         div[data-testid="stSidebar"] > div,
@@ -189,7 +213,7 @@ def inject_theme_css(theme: str) -> None:
             color: #111111 !important;
         }
 
-        /* Collapse / expand control (the little tab) */
+        /* Collapse / expand control */
         button[kind="header"],
         [data-testid="collapsedControl"],
         [data-testid="stSidebarCollapsedControl"],
@@ -199,9 +223,11 @@ def inject_theme_css(theme: str) -> None:
             border: 1px solid #ccc !important;
         }
         [data-testid="collapsedControl"] svg,
-        [data-testid="stSidebarCollapsedControl"] svg {
+        [data-testid="stSidebarCollapsedControl"] svg,
+        header svg, [data-testid="stHeader"] svg {
             fill: #111111 !important;
             stroke: #111111 !important;
+            color: #111111 !important;
         }
 
         h1, h2, h3, h4, h5, h6, p, label, span, li {
@@ -219,7 +245,6 @@ def inject_theme_css(theme: str) -> None:
         </style>
         """
     st.markdown(css, unsafe_allow_html=True)
-
 
 # ---------------------------------------------------------------------------
 # Page renderers
