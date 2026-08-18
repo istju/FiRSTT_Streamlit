@@ -139,11 +139,16 @@ def page_home() -> None:
     st.markdown(t("app_subtitle"))
 
     st.subheader(t("section_history"))
-    history = load_markdown(MAXWELL_HISTORY_PATH)
+
+    # Language-aware history file
+    lang = st.session_state.get("lang", "en")
+    history_path = DATA_DIR / f"maxwell_history_{lang}.md"
+    history = load_markdown(history_path)
     st.markdown(history)
 
     st.divider()
     st.subheader(t("section_symbols_overview"))
+    # ... a többi változatlan
     st.info(
         "The full layered Symbol Registry is available under the **Symbol Registry** menu. "
         "Key principle: SOURCE → RECONSTRUCTED / UNIFIED → FiRSTT INTERPRETATION remain strictly separate."
