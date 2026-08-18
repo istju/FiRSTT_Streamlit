@@ -23,7 +23,9 @@ DATA_DIR = BASE_DIR / "data"
 
 SYMBOL_REGISTRY_PATH = DATA_DIR / "symbol_registry_v2.md"
 EQUATION_REGISTRY_PATH = DATA_DIR / "equation_registry_v2.md"
-MAXWELL_HISTORY_PATH = DATA_DIR / "maxwell_history.md"
+#MAXWELL_HISTORY_PATH = DATA_DIR / "maxwell_history.md"
+# A régi MAXWELL_HISTORY_PATH helyett már nem kell fix path,
+# mert a page_home dinamikusan választ.
 
 # ---------------------------------------------------------------------------
 # i18n – English is the default language
