@@ -110,7 +110,7 @@ def load_markdown(path: Path) -> str:
     return f"*(File not found: `{path.name}`. Place it in the `data/` folder.)*"
 
 
-def inject_theme_css(theme: str) -> None:
+
 def inject_theme_css(theme: str) -> None:
     """Stronger CSS override so the in-app Light/Dark toggle actually works
     even when the browser or OS prefers the opposite scheme.
