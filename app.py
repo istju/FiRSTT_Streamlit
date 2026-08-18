@@ -111,26 +111,72 @@ def load_markdown(path: Path) -> str:
 
 
 def inject_theme_css(theme: str) -> None:
-    """Minimal custom CSS for light / dark feel beyond Streamlit defaults."""
+    """Stronger CSS override so the in-app Light/Dark toggle actually works
+    even when the browser or OS prefers the opposite scheme.
+    """
     if theme == "dark":
-        st.markdown(
-            """
-            <style>
-            .block-container { padding-top: 1.5rem; }
-            div[data-testid="stSidebar"] { background-color: #1e1e1e; }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        css = """
+        <style>
+        /* Force dark palette */
+        html, body, [data-testid="stAppViewContainer"],
+        .stApp, .main, .block-container {
+            background-color: #0e1117 !important;
+            color: #fafafa !important;
+        }
+        div[data-testid="stSidebar"] {
+            background-color: #1a1d24 !important;
+        }
+        div[data-testid="stSidebar"] * {
+            color: #e0e0e0 !important;
+        }
+        h1, h2, h3, h4, h5, h6, p, label, span, li {
+            color: #fafafa !important;
+        }
+        .stMarkdown, .stMarkdown p, .stCaption {
+            color: #e6e6e6 !important;
+        }
+        div[data-testid="stExpander"] {
+            background-color: #1a1d24 !important;
+            border-color: #333 !important;
+        }
+        hr {
+            border-color: #333 !important;
+        }
+        .block-container { padding-top: 1.5rem; }
+        </style>
+        """
     else:
-        st.markdown(
-            """
-            <style>
-            .block-container { padding-top: 1.5rem; }
-            </style>
-            """,
-            unsafe_allow_html=True,
-        )
+        css = """
+        <style>
+        /* Force light palette */
+        html, body, [data-testid="stAppViewContainer"],
+        .stApp, .main, .block-container {
+            background-color: #ffffff !important;
+            color: #111111 !important;
+        }
+        div[data-testid="stSidebar"] {
+            background-color: #f0f2f6 !important;
+        }
+        div[data-testid="stSidebar"] * {
+            color: #111111 !important;
+        }
+        h1, h2, h3, h4, h5, h6, p, label, span, li {
+            color: #111111 !important;
+        }
+        .stMarkdown, .stMarkdown p, .stCaption {
+            color: #222222 !important;
+        }
+        div[data-testid="stExpander"] {
+            background-color: #ffffff !important;
+            border-color: #ddd !important;
+        }
+        hr {
+            border-color: #ddd !important;
+        }
+        .block-container { padding-top: 1.5rem; }
+        </style>
+        """
+    st.markdown(css, unsafe_allow_html=True)
 
 
 # ---------------------------------------------------------------------------
