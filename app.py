@@ -721,19 +721,11 @@ def page_simulations() -> None:
 
 def page_firstt() -> None:
     st.header(t("nav_firstt"))
-    st.warning(t("placeholder_firstt"))
-    st.markdown(t("placeholder_firstt_note"))
 
-    st.markdown("### Reserved future blocks")
-    st.markdown(
-        """
-        - FiRSTT project introduction  
-        - FiRSTT-specific equations  
-        - Mathematical formalism (torsion product, hierarchy)  
-        - Later experimental documentation slots  
-        - Integration point for the quaternion class (`src/quaternion.py`)
-        """
-    )
+    lang = st.session_state.get("lang", "en")
+    path = DATA_DIR / f"firstt_project_{lang}.md"
+    content = load_markdown(path)
+    st.markdown(content)
 
 
 def page_sources() -> None:
