@@ -858,7 +858,7 @@ FiRSTT mathematical system
 
     st.divider()
     with st.expander(
-        "Teljes markdown forras (Szimbolum jegyzek)" if hu
+        "Teljes markdown forrás (Szimbólum jegyzék)" if hu
         else "Full markdown source (Symbol Registry)",
         expanded=False,
     ):
