@@ -1276,8 +1276,8 @@ These are recorded as part of the wider scientific context, not as experimental 
 theoretical validation of the present reconstruction.
 Their contributions helped shape questions and directions explored in this project.
 
-The present layered reconstruction of Maxwell's equations
-(SOURCE → RECONSTRUCTED → FiRSTT INTERPRETATION) remains an independent mathematical
+The present layered reconstruction of Maxwell`s equations
+(SOURCE -> RECONSTRUCTED -> FiRSTT INTERPRETATION) remains an independent mathematical
 and conceptual effort; it does not claim endorsement by the above authors,
 nor does it present experimental validation.
 """
