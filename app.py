@@ -1279,7 +1279,7 @@ and the **Einstein-Cartan theory** (spacetime torsion linked to spin) are also a
 These are recorded as part of the wider scientific context, not as experimental or
 theoretical validation of the present reconstruction.
 
-The present layered reconstruction of Maxwell's equations
+The present layered reconstruction of Maxwell`s equations
 (SOURCE -> RECONSTRUCTED -> FiRSTT INTERPRETATION) remains an independent mathematical
 and conceptual effort; it does not claim endorsement by the above authors,
 nor does it present experimental validation.
