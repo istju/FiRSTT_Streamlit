@@ -1306,12 +1306,12 @@ of the quaternion algebra (including Arcsi and project discussions).
     else:
         st.markdown(
             """
-*Reference list – to be expanded later:*
+*Reference list - to be expanded later:*
 
 - Maxwell’s original papers / treatises  
 - Historical secondary literature on the development of the field equations  
 - Quaternion algebra (Hamilton)  
-- Project-internal A–H source files (not public)  
+- Project-internal A-H source files (not public)  
 - Future publications or preprints of the FiRSTT framework  
 """
         )
