@@ -877,8 +877,8 @@ FiRSTT mathematical system
 |-------------------|--------|--------------------------|------------------|
 | **A** (vector potential) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
 | **D** (electric displacement) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
-| **J_conduction** (conduction current) | (u, v, w) | (u, v, w) | `J_cond_x, …` |
-| **J_total** (total current) | (p, q, r) | (p, q, r) | `J_total_x, …` |
+| **J_conduction** (conduction current) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
+| **J_total** (total current) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
 | **E** (electric field) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
 | **H** (magnetic field) | (α, β, γ) | (α, β, γ) | `H_x, H_y, H_z` |
 | **Ψ** (scalar potential) | Ψ | Ψ | `Psi` |
