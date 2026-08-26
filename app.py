@@ -1311,7 +1311,7 @@ of the quaternion algebra (including Arcsi and project discussions).
             """
 *Reference list - to be expanded later:*
 
-- Maxwell's original papers / treatises
+- Maxwell`s original papers / treatises
 - Historical secondary literature on the development of the field equations
 - Quaternion algebra (Hamilton)
 - Project-internal A-H source files (not public)
