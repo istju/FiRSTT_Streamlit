@@ -1,5 +1,4 @@
-        
-         """
+"""
 FiRSTT Streamlit Base v2
 ========================
 Maxwell reconstruction interface with clean layered notation,
