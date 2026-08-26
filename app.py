@@ -1,4 +1,5 @@
-"""
+        
+         """
 FiRSTT Streamlit Base v2
 ========================
 Maxwell reconstruction interface with clean layered notation,
@@ -789,85 +790,42 @@ FiRSTT mathematical system
         )
 
     # ------------------------------------------------------------------
-    # 12–13. Summary table & rules
+    # 12-13. Summary table & rules
     # ------------------------------------------------------------------
     with st.expander(
-        "12–13. Összefoglaló jelölési táblázat és jegyzékszabályok" if hu
-        else "12–13. Summary notation table & registry rules",
+        "12-13. Osszefoglalo jelolesi tablazat es jegyzekszabalyok" if hu
+        else "12-13. Summary notation table & registry rules",
         expanded=False,
     ):
         st.markdown(
-            "#### Összefoglaló táblázat" if hu else "#### Summary table"
+            "#### Osszefoglalo tablazat" if hu else "#### Summary table"
         )
         if hu:
             st.markdown(
                 """
-| Fizikai mennyiség | FORRÁS | REKONSTRUÁLT / EGYSÉGES | Streamlit / code |
+| Fizikai mennyiseg | FORRAS | REKONSTRUALT / EGYSÉGES | Streamlit / code |
 |-------------------|--------|--------------------------|------------------|
-| \( \\mathbf{A} \) | \( (f,g,h) \) | \( (f_A,g_A,h_A) \) | `A_x, A_y, A_z` |
-| \( \\mathbf{D} \) | \( (f,g,h) \) | \( (f_D,g_D,h_D) \) | `D_x, D_y, D_z` |
-| \( \\mathbf{J}_{\\mathrm{conduction}} \) | \( (u,v,w) \) | \( (u,v,w) \) | `J_cond_x, ...` |
-| \( \\mathbf{J}_{\\mathrm{total}} \) | \( (p,q,r) \) | \( (p,q,r) \) | `J_total_x, ...` |
-| \( \\mathbf{E} \) | \( (P,Q,R) \) | \( (P,Q,R) \) | `E_x, E_y, E_z` |
-| \( \\mathbf{H} \) | \( (\\alpha,\\beta,\\gamma) \) | \( (\\alpha,\\beta,\\gamma) \) | `H_x, H_y, H_z` |
-| \( \\Psi \) | \( \\Psi \) | \( \\Psi \) | `Psi` |
-| \( \\rho_e \) | \( \\rho_e \) | \( \\rho_e \) | `rho_e` |
-| \( \\rho \) | \( \\rho \) | \( \\rho \) | `rho` |
+| **A** (vektorpotencial) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
+| **D** (elektromos elmozdulas) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
+| **J_conduction** (vezetesi aram) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
+| **J_total** (teljes aram) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
+| **E** (elektromos tererősseg) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
+| **H** (magneses tererősseg) | (alpha, beta, gamma) | (alpha, beta, gamma) | `H_x, H_y, H_z` |
+| **Psi** (skalarpotencial) | Psi | Psi | `Psi` |
+| **rho_e** (szabad toltessuruseg) | rho_e | rho_e | `rho_e` |
+| **rho** (fajlagos ellenallas) | rho | rho | `rho` |
 """
             )
-            st.markdown("#### Fő jegyzékszabályok")
+            st.markdown("#### Fo jegyzekszabalyok")
             st.markdown(
                 """
-1. A szimbólum jelentése fejezetről fejezetre nem változik.  
-2. A forrásütközéseket rétegezett ábrázolás kezeli, nem csendes átnevezés.  
-3. FORRÁS / REKONSTRUÁLT / FiRSTT ÉRTELMEZÉS szigorúan elkülönül.  
-4. A standard matematika és a FiRSTT-specifikus konstrukciók egyértelműen elválnak.  
-5. A `quaternion_v2` négy rétege nem keverhető.  
-6. A szimulációs helyfoglalók csak matematikai illusztrációk.  
-7. A `torsion_product` fizikai értelmezése nyitott / hipotézis.
-"""
-            )
-        else:
-            st.markdown(
-                """
-| Physical quantity | SOURCE | RECONSTRUCTED / UNIFIED | Streamlit / code |
-# ------------------------------------------------------------------
-    # 12–13. Summary table & rules
-    # ------------------------------------------------------------------
-    with st.expander(
-        "12–13. Összefoglaló jelölési táblázat és jegyzékszabályok" if hu
-        else "12–13. Summary notation table & registry rules",
-        expanded=False,
-    ):
-        st.markdown(
-            "#### Összefoglaló táblázat" if hu else "#### Summary table"
-        )
-        if hu:
-            st.markdown(
-                """
-| Fizikai mennyiség | FORRÁS | REKONSTRUÁLT / EGYSÉGES | Streamlit / code |
-|-------------------|--------|--------------------------|------------------|
-| **A** (vektorpotenciál) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
-| **D** (elektromos elmozdulás) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
-| **J_conduction** (vezetési áram) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
-| **J_total** (teljes áram) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
-| **E** (elektromos térerősség) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
-| **H** (mágneses térerősség) | (α, β, γ) | (α, β, γ) | `H_x, H_y, H_z` |
-| **Ψ** (skalárpotenciál) | Ψ | Ψ | `Psi` |
-| **ρ_e** (szabad töltéssűrűség) | ρ_e | ρ_e | `rho_e` |
-| **ρ** (fajlagos ellenállás) | ρ | ρ | `rho` |
-"""
-            )
-            st.markdown("#### Fő jegyzékszabályok")
-            st.markdown(
-                """
-1. A szimbólum jelentése fejezetről fejezetre nem változik.  
-2. A forrásütközéseket rétegezett ábrázolás kezeli, nem csendes átnevezés.  
-3. FORRÁS / REKONSTRUÁLT / FiRSTT ÉRTELMEZÉS szigorúan elkülönül.  
-4. A standard matematika és a FiRSTT-specifikus konstrukciók egyértelműen elválnak.  
-5. A `quaternion_v2` négy rétege nem keverhető.  
-6. A szimulációs helyfoglalók csak matematikai illusztrációk.  
-7. A `torsion_product` fizikai értelmezése nyitott / hipotézis.
+1. A szimbolum jelentese fejezeterol fejezetre nem valtozik.
+2. A forrasutkozeseket retegezett abrazolas kezeli, nem csendes atnevezes.
+3. FORRAS / REKONSTRUALT / FiRSTT ERTELMEZES szigoruan elkulonul.
+4. A standard matematika es a FiRSTT-specifikus konstrukciok egyertelmuen elvalnak.
+5. A `quaternion_v2` negy retege nem keverheto.
+6. A szimulacios helyfoglalok csak matematikai illusztraciok.
+7. A `torsion_product` fizikai ertelmezese nyitott / hipotezis.
 """
             )
         else:
@@ -880,24 +838,33 @@ FiRSTT mathematical system
 | **J_conduction** (conduction current) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
 | **J_total** (total current) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
 | **E** (electric field) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
-| **H** (magnetic field) | (α, β, γ) | (α, β, γ) | `H_x, H_y, H_z` |
-| **Ψ** (scalar potential) | Ψ | Ψ | `Psi` |
-| **ρ_e** (free charge density) | ρ_e | ρ_e | `rho_e` |
-| **ρ** (resistivity) | ρ | ρ | `rho` |
+| **H** (magnetic field) | (alpha, beta, gamma) | (alpha, beta, gamma) | `H_x, H_y, H_z` |
+| **Psi** (scalar potential) | Psi | Psi | `Psi` |
+| **rho_e** (free charge density) | rho_e | rho_e | `rho_e` |
+| **rho** (resistivity) | rho | rho | `rho` |
 """
             )
             st.markdown("#### Key registry rules")
             st.markdown(
                 """
-1. Symbol meaning is not changed from chapter to chapter.  
-2. Source collisions are handled by layered representation, not silent renaming.  
-3. SOURCE / RECONSTRUCTED / FiRSTT INTERPRETATION remain strictly separate.  
-4. Standard mathematics and FiRSTT-specific constructions are clearly distinguished.  
-5. The four layers of `quaternion_v2` must not be mixed.  
-6. Simulation placeholders are mathematical illustration only.  
+1. Symbol meaning is not changed from chapter to chapter.
+2. Source collisions are handled by layered representation, not silent renaming.
+3. SOURCE / RECONSTRUCTED / FiRSTT INTERPRETATION remain strictly separate.
+4. Standard mathematics and FiRSTT-specific constructions are clearly distinguished.
+5. The four layers of `quaternion_v2` must not be mixed.
+6. Simulation placeholders are mathematical illustration only.
 7. `torsion_product` physical interpretation remains open / hypothesis.
 """
             )
+
+    st.divider()
+    with st.expander(
+        "Teljes markdown forras (Szimbolum jegyzek)" if hu
+        else "Full markdown source (Symbol Registry)",
+        expanded=False,
+    ):
+        content = load_markdown(SYMBOL_REGISTRY_PATH)
+        st.markdown(content)
     # ------------------------------------------------------------------
     # Structured equation data (keeps layers explicit and easy to edit)
     # ------------------------------------------------------------------
@@ -1438,3 +1405,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+   
