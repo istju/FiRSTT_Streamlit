@@ -1299,7 +1299,7 @@ of the quaternion algebra (including Arcsi and project discussions).
 - Maxwell eredeti dolgozatai / értekezései  
 - Történeti szakirodalom az elektromágneses téregyenletek fejlődéséről  
 - Kvaternió-algebra (Hamilton)  
-- Projekt-belső A–H forrásfájlok (nem nyilvánosak)  
+- Projekt-belső A-H forrásfájlok (nem nyilvánosak)  
 - A FiRSTT keret későbbi publikációi / preprintjei  
 """
         )
