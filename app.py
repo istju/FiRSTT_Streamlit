@@ -1294,7 +1294,7 @@ of the quaternion algebra (including Arcsi and project discussions).
     if lang == "hu":
         st.markdown(
             """
-*Hivatkozási lista – később bővíthető:*
+*Hivatkozási lista - később bővíthető:*
 
 - Maxwell eredeti dolgozatai / értekezései  
 - Történeti szakirodalom az elektromágneses téregyenletek fejlődéséről  
