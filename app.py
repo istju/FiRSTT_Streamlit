@@ -1271,7 +1271,7 @@ and ideas of:
 - **Roland Tóth** (LIF Academy)
 - Among the broader historical and conceptual influences that shaped questions about
 time and geometry, the work of **Albert Einstein** (the move beyond Newtonian absolute time)
-and the **Einstein–Cartan theory** (spacetime torsion linked to spin) are also acknowledged.
+and the **Einstein-Cartan theory** (spacetime torsion linked to spin) are also acknowledged.
 These are recorded as part of the wider scientific context, not as experimental or
 theoretical validation of the present reconstruction.
 Their contributions helped shape questions and directions explored in this project.
