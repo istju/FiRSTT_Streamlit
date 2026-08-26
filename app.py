@@ -802,29 +802,29 @@ FiRSTT mathematical system
         if hu:
             st.markdown(
                 """
-| Fizikai mennyiseg | FORRAS | REKONSTRUALT / EGYSÉGES | Streamlit / code |
+| Fizikai mennyiség | FORRÁS | REKONSTRUÁLT / EGYSÉGES | Streamlit / code |
 |-------------------|--------|--------------------------|------------------|
-| **A** (vektorpotencial) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
-| **D** (elektromos elmozdulas) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
-| **J_conduction** (vezetesi aram) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
-| **J_total** (teljes aram) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
-| **E** (elektromos tererősseg) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
-| **H** (magneses tererősseg) | (alpha, beta, gamma) | (alpha, beta, gamma) | `H_x, H_y, H_z` |
-| **Psi** (skalarpotencial) | Psi | Psi | `Psi` |
-| **rho_e** (szabad toltessuruseg) | rho_e | rho_e | `rho_e` |
-| **rho** (fajlagos ellenallas) | rho | rho | `rho` |
+| **A** (vektorpotenciáll) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
+| **D** (elektromos elmozdulás) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
+| **J_conduction** (vezetési áram) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
+| **J_total** (teljes áram) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
+| **E** (elektromos térerősség) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
+| **H** (mágneses térerősség) | (alpha, beta, gamma) | (alpha, beta, gamma) | `H_x, H_y, H_z` |
+| **Psi** (skalárpotenciál) | Psi | Psi | `Psi` |
+| **rho_e** (szabad töltéssűrűség) | rho_e | rho_e | `rho_e` |
+| **rho** (fajlagos ellenállás) | rho | rho | `rho` |
 """
             )
-            st.markdown("#### Fo jegyzekszabalyok")
+            st.markdown("#### Fő jegyzékszabályok")
             st.markdown(
                 """
-1. A szimbolum jelentese fejezeterol fejezetre nem valtozik.
-2. A forrasutkozeseket retegezett abrazolas kezeli, nem csendes atnevezes.
-3. FORRAS / REKONSTRUALT / FiRSTT ERTELMEZES szigoruan elkulonul.
-4. A standard matematika es a FiRSTT-specifikus konstrukciok egyertelmuen elvalnak.
-5. A `quaternion_v2` negy retege nem keverheto.
-6. A szimulacios helyfoglalok csak matematikai illusztraciok.
-7. A `torsion_product` fizikai ertelmezese nyitott / hipotezis.
+1. A szimbólum jelentése fejezeteről fejezetre nem változik.
+2. A forrásütközéseket rétegezett ábrázolás kezeli, nem csendes átnevezés.
+3. FORRÁS / REKONSTRUÁLT / FiRSTT ÉRTELMEZÉS szigorúan elkülönül.
+4. A standard matematika es a FiRSTT-specifikus konstrukciók egyértelműen elválnak.
+5. A `quaternion_v2` négy rétege nem keverhető.
+6. A szimulációs helyfoglalók csak matematikai illusztrációk.
+7. A `torsion_product` fizikai értelmezése nyitott / hipotézis.
 """
             )
         else:
@@ -1404,4 +1404,8 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-   
+
+
+            
+                        
+    
