@@ -1228,33 +1228,34 @@ def page_sources() -> None:
     if lang == "hu":
         st.markdown(
             """
-A jelen rekonstrukció és a tágabb FiRSTT keret inspirációt merített a következő személyek
-munkásságából és gondolataiból:
+A jelen rekonstrukcio es a tagabb FiRSTT keret inspiraciot meritett a kovetkezo szemelyek
+munkassagabol es gondolataibol:
 
 - **Nyikolaj Kozirev**
 - **Anatolij Akimov**
 - **Gennagyij Sipov**
 - **Albert Vejnyik**
-- **Kisfaludy György** (Univerzum Egyháza)
-- **Tóth Roland** (LIF Academy)
-- Az idő és a geometria kérdéseit formáló tágabb történeti és fogalmi hatások között
-**Albert Einstein** munkássága (a newtoni abszolút idő meghaladása) és az
-**Einstein-Cartan-elmélet** (a spinhez kapcsolódó téridő-torzió) szintén említést érdemel.
-Ezek a tágabb tudományos kontextus részeként szerepelnek, nem a jelenlegi rekonstrukció
-kísérleti vagy elméleti igazolásaként.
+- **Kisfaludy Gyorgy** (Univerzum Egyhaza)
+- **Toth Roland** (LIF Academy)
 
-Munkájuk segített formálni a projektben vizsgált kérdéseket és irányokat.
+Munkajuk segitett formalni a projektben vizsgalt kerdeseket es iranyokat.
 
-A Maxwell-egyenletek rétegezett rekonstrukciója
-(FORRÁS -> REKONSTRUÁLT -> FiRSTT ÉRTELMEZÉS) önálló matematikai és fogalmi munka;
-nem állítja a fenti szerzők támogatását, és nem kísérleti igazolásként jelenik meg.
+Az ido es a geometria kerdeseit formalo tagabb torteneti es fogalmi hatasok kozott
+**Albert Einstein** munkassaga (a newtoni abszolut ido meghaladasa) es az
+**Einstein-Cartan-elmelet** (a spinhez kapcsolodo terido-torzio) szintén említést érdemel.
+Ezek a tagabb tudomanyos kontextus reszekent szerepelnek, nem a jelenlegi rekonstrukcio
+kiserleti vagy elmeleti igazolasakent.
+
+A Maxwell-egyenletek retegezett rekonstrukcioja
+(FORRAS -> REKONSTRUALT -> FiRSTT ERTELMEZES) onallo matematikai es fogalmi munka;
+nem allitja a fenti szerzok tamogatasat, es nem kiserleti igazolas kent jelenik meg.
 """
         )
         st.markdown(
             """
-További köszönet illeti azokat, akik a jelölési rétegek (FORRÁS / REKONSTRUÁLT / FiRSTT)
-szigorú elválasztásában és a kvaternió-algebrai határok tisztázásában segítettek
-(köztük Arcsi és a projekt beszélgetései).
+Tovabbi koszonet illeti azokat, akik a jelolesi retegek (FORRAS / REKONSTRUALT / FiRSTT)
+szigoru elvalasztasaban es a kvaternio-algebrai hatarok tisztazasaban segitettek
+(koztuk Arcsi es a projekt beszelgetesei).
 """
         )
     else:
@@ -1266,17 +1267,19 @@ and ideas of:
 - **Nikolai Kozyrev**
 - **Anatoly Akimov**
 - **Gennady Shipov**
-- **Albert Veĭnik**
-- **György Kisfaludy** (Univerzum Egyháza)
-- **Roland Tóth** (LIF Academy)
-- Among the broader historical and conceptual influences that shaped questions about
+- **Albert Veinik**
+- **Gyorgy Kisfaludy** (Univerzum Egyhaza)
+- **Roland Toth** (LIF Academy)
+
+Their contributions helped shape questions and directions explored in this project.
+
+Among the broader historical and conceptual influences that shaped questions about
 time and geometry, the work of **Albert Einstein** (the move beyond Newtonian absolute time)
 and the **Einstein-Cartan theory** (spacetime torsion linked to spin) are also acknowledged.
 These are recorded as part of the wider scientific context, not as experimental or
 theoretical validation of the present reconstruction.
-Their contributions helped shape questions and directions explored in this project.
 
-The present layered reconstruction of Maxwell`s equations
+The present layered reconstruction of Maxwell's equations
 (SOURCE -> RECONSTRUCTED -> FiRSTT INTERPRETATION) remains an independent mathematical
 and conceptual effort; it does not claim endorsement by the above authors,
 nor does it present experimental validation.
@@ -1287,6 +1290,32 @@ nor does it present experimental validation.
 Additional thanks go to those who helped keep the notation layers
 (SOURCE / RECONSTRUCTED / FiRSTT) strictly separate and who clarified the boundaries
 of the quaternion algebra (including Arcsi and project discussions).
+"""
+        )
+
+    st.subheader(t("sources_links"))
+    if lang == "hu":
+        st.markdown(
+            """
+*Hivatkozasi lista - kesobb bovitheto:*
+
+- Maxwell eredeti dolgozatai / ertekezesei
+- Torteneti szakirodalom az elektromagneses teregyenletek fejlodeserol
+- Kvaternio-algebra (Hamilton)
+- Projekt-belso A-H forrasfajlok (nem nyilvánosak)
+- A FiRSTT keret kesobbi publikacioi / preprintjei
+"""
+        )
+    else:
+        st.markdown(
+            """
+*Reference list - to be expanded later:*
+
+- Maxwell's original papers / treatises
+- Historical secondary literature on the development of the field equations
+- Quaternion algebra (Hamilton)
+- Project-internal A-H source files (not public)
+- Future publications or preprints of the FiRSTT framework
 """
         )
 
