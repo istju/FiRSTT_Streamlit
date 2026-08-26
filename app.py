@@ -368,21 +368,192 @@ def page_symbols() -> None:
         )
         st.info("**Status:** RESOLVED_BY_REPRESENTATION_LAYER")
 
+def page_symbols() -> None:
+    st.header(t("nav_symbols"))
+    lang = st.session_state.get("lang", "en")
+    hu = lang == "hu"
+
+    if hu:
+        st.caption(
+            "Rétegezett jelölés: **FORRÁS** → **REKONSTRUÁLT / EGYSÉGES** → **FiRSTT ÉRTELMEZÉS**. "
+            "Az ütközéseket rétegezett ábrázolás oldja fel, nem csendes átnevezés."
+        )
+    else:
+        st.caption(
+            "Layered notation: **SOURCE** → **RECONSTRUCTED / UNIFIED** → **FiRSTT INTERPRETATION**. "
+            "Collisions are resolved by representation layers, not by silent renaming."
+        )
+
+    # ------------------------------------------------------------------
+    # 1. Quaternion convention
+    # ------------------------------------------------------------------
+    with st.expander(
+        "1. Kvaternió konvenció (standard matematika)" if hu
+        else "1. Quaternion convention (standard mathematics)",
+        expanded=False,
+    ):
+        st.markdown("**Block ID:** `SYM-QUAT-STD`")
+        st.markdown("Klasszikus Hamilton-forma:" if hu else "Classical Hamilton form:")
+        st.latex(r"q = w + xi + yj + zk")
+        if hu:
+            st.markdown(
+                """
+| Matematikai komponens | Python attribútum |
+|-----------------------|-------------------|
+| skalár rész           | `w`               |
+| \( i \)-komponens         | `x`               |
+| \( j \)-komponens         | `y`               |
+| \( k \)-komponens         | `z`               |
+| vektor rész           | `(x, y, z)`       |
+"""
+            )
+            st.info("Ez **standard matematika**, nem FiRSTT-specifikus.")
+        else:
+            st.markdown(
+                """
+| Mathematical component | Python attribute |
+|------------------------|------------------|
+| scalar part            | `w`              |
+| \( i \)-component          | `x`              |
+| \( j \)-component          | `y`              |
+| \( k \)-component          | `z`              |
+| vector part            | `(x, y, z)`      |
+"""
+            )
+            st.info("This is **standard mathematics**, not FiRSTT-specific.")
+
+    # ------------------------------------------------------------------
+    # 2. Differential operator
+    # ------------------------------------------------------------------
+    with st.expander(
+        "2. Differenciáloperátor" if hu else "2. Differential operator",
+        expanded=False,
+    ):
+        st.markdown("**Block ID:** `SYM-NABLA`")
+        st.markdown("Forrásforma:" if hu else "Source form:")
+        st.latex(
+            r"\nabla = \mathbf{i}\frac{\partial}{\partial x} + \mathbf{j}\frac{\partial}{\partial y} + \mathbf{k}\frac{\partial}{\partial z}"
+        )
+        st.markdown(
+            "Kapcsolódó operátorformák:" if hu else "Related operator forms:"
+        )
+        st.latex(
+            r"\nabla\times\mathbf{A},\quad \nabla\times\mathbf{H},\quad \nabla\cdot\mathbf{D},\quad \nabla\cdot\mathbf{J}_{\mathrm{total}},\quad \nabla\cdot\mathbf{J}_{\mathrm{conduction}}"
+        )
+
+    # ------------------------------------------------------------------
+    # 3. Fields and potentials
+    # ------------------------------------------------------------------
+    with st.expander(
+        "3. Mezők és potenciálok" if hu else "3. Fields and potentials",
+        expanded=False,
+    ):
+        st.markdown(
+            "#### 3.1 Vektorpotenciál \( \\mathbf{A} \)" if hu
+            else "#### 3.1 Vector potential \( \\mathbf{A} \)"
+        )
+        st.markdown("**Block ID:** `SYM-A`")
+        st.markdown(f"**{t('layer_source')}**")
+        st.latex(r"\mathbf{A} = (f, g, h)")
+        st.markdown(f"**{t('layer_reconstructed')}**")
+        st.latex(r"\mathbf{A} = (f_A, g_A, h_A)")
+        st.caption("Streamlit / code: `A_x, A_y, A_z`")
+        st.markdown(f"**{t('layer_firstt')}**")
+        st.markdown(
+            "A mágneses erő és az elektromotoros erő egyenleteiben jelenik meg. "
+            "A longitudinális komponenssel való mélyebb szerep hipotézis szintű."
+            if hu else
+            "Appears in the magnetic force and electromotive force equations. "
+            "Any deeper role together with the longitudinal component is hypothesis-level."
+        )
+
+        st.divider()
+        st.markdown(
+            "#### 3.2 Skalárpotenciál \( \\Psi \)" if hu
+            else "#### 3.2 Scalar potential \( \\Psi \)"
+        )
+        st.markdown("**Block ID:** `SYM-PSI`")
+        st.latex(r"\Psi")
+        st.caption("Streamlit / code: `Psi`")
+        st.markdown(
+            "A \( -\\nabla\\Psi \) kiemelt longitudinális komponensként jelenik meg (hipotézis szintű olvasat)."
+            if hu else
+            "\( -\\nabla\\Psi \) appears as a highlighted longitudinal component (hypothesis-level reading)."
+        )
+
+        st.divider()
+        st.markdown(
+            "#### 3.3 Elektromos térerősség \( \\mathbf{E} \)" if hu
+            else "#### 3.3 Electric field \( \\mathbf{E} \)"
+        )
+        st.markdown("**Block ID:** `SYM-E`")
+        st.latex(r"\mathbf{E} = (P, Q, R)")
+        st.caption("Streamlit / code: `E_x, E_y, E_z`")
+
+        st.divider()
+        st.markdown(
+            "#### 3.4 Mágneses térerősség \( \\mathbf{H} \)" if hu
+            else "#### 3.4 Magnetic field \( \\mathbf{H} \)"
+        )
+        st.markdown("**Block ID:** `SYM-H`")
+        st.latex(r"\mathbf{H} = (\alpha, \beta, \gamma)")
+        st.caption("Streamlit / code: `H_x, H_y, H_z`")
+
+    # ------------------------------------------------------------------
+    # 4. Electric displacement D
+    # ------------------------------------------------------------------
+    with st.expander(
+        "4. Elektromos elmozdulás \( \\mathbf{D} \)" if hu
+        else "4. Electric displacement \( \\mathbf{D} \)",
+        expanded=False,
+    ):
+        st.markdown("**Block ID:** `SYM-D`")
+        st.markdown(f"**{t('layer_source')}**")
+        st.latex(r"\mathbf{D} = (f, g, h)")
+        st.markdown(f"**{t('layer_reconstructed')}**")
+        st.latex(r"\mathbf{D} = (f_D, g_D, h_D)")
+        st.caption("Streamlit / code: `D_x, D_y, D_z`")
+        st.markdown(f"**{t('layer_firstt')}**")
+        st.markdown(
+            "A forrásanyag ugyanazokat az \( f,g,h \) betűket használta az \( \\mathbf{A} \)-hoz és a \( \\mathbf{D} \)-hez. "
+            "A rétegezett ábrázolás feloldja az ütközést a számítás és a megjelenítés számára. "
+            "**Nem** állítja, hogy az eredeti azonos betűhasználat szándékos volt."
+            if hu else
+            "The source material used the same letters \( f,g,h \) for both \( \\mathbf{A} \) and \( \\mathbf{D} \). "
+            "Layered representation resolves the collision for computation and display. "
+            "It does **not** claim that the original identical lettering was intentional."
+        )
+        st.info(
+            ("**Állapot:** " if hu else "**Status:** ")
+            + "RESOLVED_BY_REPRESENTATION_LAYER"
+        )
+
     # ------------------------------------------------------------------
     # 5. Currents
     # ------------------------------------------------------------------
-    with st.expander("5. Currents", expanded=False):
-        st.markdown("#### 5.1 Conduction current")
+    with st.expander(
+        "5. Áramok" if hu else "5. Currents",
+        expanded=False,
+    ):
+        st.markdown(
+            "#### 5.1 Vezetési áram" if hu else "#### 5.1 Conduction current"
+        )
         st.markdown("**Block ID:** `SYM-J-COND`")
         st.latex(r"\mathbf{J}_{\mathrm{conduction}} = (u, v, w)")
         st.caption("Streamlit / code: `J_cond_x, J_cond_y, J_cond_z`")
 
         st.divider()
-        st.markdown("#### 5.2 Total current")
+        st.markdown(
+            "#### 5.2 Teljes áram" if hu else "#### 5.2 Total current"
+        )
         st.markdown("**Block ID:** `SYM-J-TOTAL`")
         st.markdown(f"**{t('layer_source')}**")
-        st.markdown("- Group A: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
-        st.markdown("- Group C: \( \\mathbf{J} = (p, q, r) \) (text identifies it as total current)")
+        if hu:
+            st.markdown("- A csoport: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
+            st.markdown("- C csoport: \( \\mathbf{J} = (p, q, r) \) (a szöveg teljes áramként azonosítja)")
+        else:
+            st.markdown("- Group A: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
+            st.markdown("- Group C: \( \\mathbf{J} = (p, q, r) \) (text identifies it as total current)")
         st.markdown(f"**{t('layer_reconstructed')}**")
         st.latex(r"\mathbf{J}_{\mathrm{total}} = (p, q, r)")
         st.caption("Streamlit / code: `J_total_x, J_total_y, J_total_z`")
@@ -391,24 +562,55 @@ def page_symbols() -> None:
         )
         st.markdown(f"**{t('layer_firstt')}**")
         st.markdown(
+            "A C-forrás jelölése már a teljes áramot jelentette. "
+            "A rekonstruált rétegben a jelentés explicitté válik: \( \\mathbf{J}_{\\mathrm{total}} \). "
+            "Az eredeti forrásjelölés változatlan."
+            if hu else
             "The C-source notation already meant total current. "
             "In the reconstructed layer the meaning is made explicit as \( \\mathbf{J}_{\\mathrm{total}} \). "
             "Original source notation is left unchanged."
         )
-        st.info("**Status:** RESOLVED_BY_REPRESENTATION_LAYER")
+        st.info(
+            ("**Állapot:** " if hu else "**Status:** ")
+            + "RESOLVED_BY_REPRESENTATION_LAYER"
+        )
 
-    # ------------------------------------------------------------------
+    # -# ------------------------------------------------------------------
     # 6–8. Charge, parameters, velocity
     # ------------------------------------------------------------------
-    with st.expander("6–8. Charge density, parameters, velocity", expanded=False):
-        st.markdown("#### Charge density")
+    with st.expander(
+        "6–8. Töltéssűrűség, paraméterek, sebesség" if hu
+        else "6–8. Charge density, parameters, velocity",
+        expanded=False,
+    ):
+        st.markdown(
+            "#### Töltéssűrűség" if hu else "#### Charge density"
+        )
         st.latex(r"\rho_e")
-        st.caption("Streamlit / code: `rho_e`  ·  free charge density")
+        st.caption(
+            "Streamlit / code: `rho_e`  ·  szabad töltéssűrűség" if hu
+            else "Streamlit / code: `rho_e`  ·  free charge density"
+        )
 
         st.divider()
-        st.markdown("#### Material parameters")
         st.markdown(
-            """
+            "#### Anyagi paraméterek" if hu else "#### Material parameters"
+        )
+        if hu:
+            st.markdown(
+                """
+| Szimbólum | Jelentés | Megjegyzés |
+|-----------|----------|------------|
+| \( \\mu \) | mágneses permeabilitás | |
+| \( k \) | \( k = 1/\\varepsilon \) | \( \\mathbf{D} = \\frac{1}{4\\pi k}\\mathbf{E} \) |
+| \( \\rho \) | fajlagos ellenállás | \( \\mathbf{E} = \\rho\\,\\mathbf{J}_{\\mathrm{conduction}} \) |
+| \( \\rho_e \) | szabad töltéssűrűség | elkülönül a \( \\rho \)-tól |
+"""
+            )
+            st.caption("A `rho` és `rho_e` kódban és tipográfiában is legyen egyértelműen elválasztva.")
+        else:
+            st.markdown(
+                """
 | Symbol | Meaning | Notes |
 |--------|---------|-------|
 | \( \\mu \) | magnetic permeability | |
@@ -416,11 +618,13 @@ def page_symbols() -> None:
 | \( \\rho \) | resistivity | used in \( \\mathbf{E} = \\rho\\,\\mathbf{J}_{\\mathrm{conduction}} \) |
 | \( \\rho_e \) | free charge density | distinct from \( \\rho \) |
 """
-        )
-        st.caption("Keep `rho` and `rho_e` clearly separated in code and typography.")
+            )
+            st.caption("Keep `rho` and `rho_e` clearly separated in code and typography.")
 
         st.divider()
-        st.markdown("#### Velocity vector")
+        st.markdown(
+            "#### Sebességvektor" if hu else "#### Velocity vector"
+        )
         st.latex(
             r"\mathbf{v} = \left( \frac{\partial x}{\partial t},\ \frac{\partial y}{\partial t},\ \frac{\partial z}{\partial t} \right)"
         )
@@ -431,15 +635,38 @@ def page_symbols() -> None:
     # ------------------------------------------------------------------
     # 9–10. Coordinates, time, FiRSTT concepts
     # ------------------------------------------------------------------
-    with st.expander("9–10. Coordinates, time & FiRSTT concepts (hypothesis)", expanded=False):
-        st.markdown("Spatial coordinates: \( x,\\ y,\\ z \)  ·  Time: \( t \)")
+    with st.expander(
+        "9–10. Koordináták, idő és FiRSTT fogalmak (hipotézis)" if hu
+        else "9–10. Coordinates, time & FiRSTT concepts (hypothesis)",
+        expanded=False,
+    ):
         st.markdown(
+            "Térbeli koordináták: \( x,\\ y,\\ z \)  ·  Idő: \( t \)" if hu
+            else "Spatial coordinates: \( x,\\ y,\\ z \)  ·  Time: \( t \)"
+        )
+        st.markdown(
+            "**FiRSTT alapfeltevés (hipotézis):** az időt elsődlegesnek tekintjük; "
+            "a tér elméleti emergenciáját egy mögöttes időbeli struktúrából vizsgáljuk. "
+            "Ez **nem** bizonyított fizikai tény, és **nem** a jelen formalizmus matematikai következménye."
+            if hu else
             "**FiRSTT base assumption (hypothesis):** time is treated as primary; "
             "the theoretical emergence of space from an underlying temporal structure is investigated. "
             "This is **not** a proven physical fact and **not** a mathematical consequence of the present formalism."
         )
-        st.markdown(
-            """
+        if hu:
+            st.markdown(
+                """
+| Fogalom | Státusz | Megjegyzés |
+|---------|---------|------------|
+| Idő mint forrás | Hipotézis | A projekt központi hipotézise |
+| Torzió | Nyitott matematikai definíció | Később expliciten definiálandó |
+| Spin | A kvaternió vektorrészéhez kötve | Geometriai / spin-szerű struktúra |
+| Longitudinális komponens | \( -\\nabla\\Psi \) kiemelve | Hipotézis szintű olvasat |
+"""
+            )
+        else:
+            st.markdown(
+                """
 | Concept | Status | Remark |
 |---------|--------|--------|
 | Time as source | Hypothesis | Central project hypothesis |
@@ -447,28 +674,57 @@ def page_symbols() -> None:
 | Spin | Linked to quaternion vector part | Geometric / spin-like structure |
 | Longitudinal component | \( -\\nabla\\Psi \) highlighted | Hypothesis-level reading |
 """
-        )
+            )
 
     # ------------------------------------------------------------------
     # 11. Implementation convention — quaternion_v2
     # ------------------------------------------------------------------
-    with st.expander("11. Implementation convention — quaternion_v2 (four layers)", expanded=True):
+    with st.expander(
+        "11. Implementációs konvenció — quaternion_v2 (négy réteg)" if hu
+        else "11. Implementation convention — quaternion_v2 (four layers)",
+        expanded=True,
+    ):
         st.markdown("**Block ID:** `SYM-QUAT-IMPL`")
-        st.markdown("Reference: `quaternion_v2.py` / `src/quaternion.py`")
+        st.markdown(
+            "Referencia: `quaternion_v2.py` / `src/quaternion.py`" if hu
+            else "Reference: `quaternion_v2.py` / `src/quaternion.py`"
+        )
 
-        st.markdown("#### 11.1 Standard mathematical layer (Hamilton \( \\mathbb{H} \))")
+        st.markdown(
+            "#### 11.1 Standard matematikai réteg (Hamilton \( \\mathbb{H} \))" if hu
+            else "#### 11.1 Standard mathematical layer (Hamilton \( \\mathbb{H} \))"
+        )
         st.latex(r"q = w + xi + yj + zk")
         st.markdown(
+            "Műveletek: összeadás, Hamilton-szorzat, konjugált, norma, inverz, forgatásreprezentáció. "
+            "Ez a réteg **nem** FiRSTT-specifikus."
+            if hu else
             "Operations: addition, Hamilton product, conjugate, norm, inverse, rotation representation. "
             "This layer is **not** FiRSTT-specific."
         )
 
-        st.markdown("#### 11.2 FiRSTT-specific construction — torsion_product")
+        st.markdown(
+            "#### 11.2 FiRSTT-specifikus konstrukció — torsion_product" if hu
+            else "#### 11.2 FiRSTT-specific construction — torsion_product"
+        )
         st.latex(
             r"T_g(q_1,q_2) = q_1q_2 + \frac{g}{2}(q_1q_2 - q_2q_1) = \Bigl(1+\frac{g}{2}\Bigr)q_1q_2 - \frac{g}{2}q_2q_1"
         )
-        st.markdown(
-            """
+        if hu:
+            st.markdown(
+                """
+**Matematikai tulajdonságok** (nem értelmezés):
+- \( g = 0 \) visszaadja a standard Hamilton-szorzatot
+- \( g \\neq 0 \) nemkommutatív korrekciót vezet be
+- A kvaterniószorzat kommutátor-szerű részét használja
+
+Regisztrálva mint: **FiRSTT-specifikus torziós szorzat-konstrukció**.  
+Fizikai értelmezés (téridő-torzió stb.): **nyitott / hipotézis**.
+"""
+            )
+        else:
+            st.markdown(
+                """
 **Mathematical properties** (not interpretation):
 - \( g = 0 \) recovers the standard Hamilton product
 - \( g \\neq 0 \) introduces a non-commutative correction
@@ -477,23 +733,39 @@ def page_symbols() -> None:
 Registered as: **FiRSTT-specific torsional product construction**.  
 Physical interpretation (spacetime torsion, etc.): **open / hypothesis**.
 """
-        )
+            )
 
-        st.markdown("#### 11.3 Numerical demonstration layer")
         st.markdown(
+            "#### 11.3 Numerikus demonstrációs réteg" if hu
+            else "#### 11.3 Numerical demonstration layer"
+        )
+        st.markdown(
+            "Az `evolve_quaternion_field()` **egyszerűsített, mesterséges evolúciós modell**. "
+            "**Nem** Maxwell-solver, és **nem** az idő → tér emergencia levezetése. "
+            "Demonstráció / toy model címkével kell ellátni."
+            if hu else
             "`evolve_quaternion_field()` is a **simplified, artificial evolutionary model**. "
             "It is **not** a Maxwell solver and **not** a derivation of time → space emergence. "
             "Must be labelled as demonstration / toy model."
         )
 
-        st.markdown("#### 11.4 FiRSTT physical hypothesis layer")
         st.markdown(
+            "#### 11.4 FiRSTT fizikai hipotézis réteg" if hu
+            else "#### 11.4 FiRSTT physical hypothesis layer"
+        )
+        st.markdown(
+            "Az idő elsődlegessége, a tér emergenciája és a `torsion_product` fizikai kapcsolata "
+            "a téridő-torzióhoz **hipotézis** szinten marad. "
+            "A kód a kvaterniókat algebrai reprezentációként és numerikus számítási objektumként kezeli."
+            if hu else
             "Primacy of time, emergence of space, and physical relation of `torsion_product` "
             "to spacetime torsion remain at **hypothesis** level. "
             "The code treats quaternions as algebraic representation and numerical computational object."
         )
 
-        st.markdown("#### 11.5 Hierarchy summary")
+        st.markdown(
+            "#### 11.5 Hierarchia összefoglaló" if hu else "#### 11.5 Hierarchy summary"
+        )
         st.code(
             """
 FiRSTT mathematical system
@@ -519,10 +791,45 @@ FiRSTT mathematical system
     # ------------------------------------------------------------------
     # 12–13. Summary table & rules
     # ------------------------------------------------------------------
-    with st.expander("12–13. Summary notation table & registry rules", expanded=False):
-        st.markdown("#### Summary table")
+    with st.expander(
+        "12–13. Összefoglaló jelölési táblázat és jegyzékszabályok" if hu
+        else "12–13. Summary notation table & registry rules",
+        expanded=False,
+    ):
         st.markdown(
-            """
+            "#### Összefoglaló táblázat" if hu else "#### Summary table"
+        )
+        if hu:
+            st.markdown(
+                """
+| Fizikai mennyiség | FORRÁS | REKONSTRUÁLT / EGYSÉGES | Streamlit / code |
+|-------------------|--------|--------------------------|------------------|
+| \( \\mathbf{A} \) | \( (f,g,h) \) | \( (f_A,g_A,h_A) \) | `A_x, A_y, A_z` |
+| \( \\mathbf{D} \) | \( (f,g,h) \) | \( (f_D,g_D,h_D) \) | `D_x, D_y, D_z` |
+| \( \\mathbf{J}_{\\mathrm{conduction}} \) | \( (u,v,w) \) | \( (u,v,w) \) | `J_cond_x, …` |
+| \( \\mathbf{J}_{\\mathrm{total}} \) | \( (p,q,r) \) | \( (p,q,r) \) | `J_total_x, …` |
+| \( \\mathbf{E} \) | \( (P,Q,R) \) | \( (P,Q,R) \) | `E_x, E_y, E_z` |
+| \( \\mathbf{H} \) | \( (\\alpha,\\beta,\\gamma) \) | \( (\\alpha,\\beta,\\gamma) \) | `H_x, H_y, H_z` |
+| \( \\Psi \) | \( \\Psi \) | \( \\Psi \) | `Psi` |
+| \( \\rho_e \) | \( \\rho_e \) | \( \\rho_e \) | `rho_e` |
+| \( \\rho \) | \( \\rho \) | \( \\rho \) | `rho` |
+"""
+            )
+            st.markdown("#### Fő jegyzékszabályok")
+            st.markdown(
+                """
+1. A szimbólum jelentése fejezetről fejezetre nem változik.  
+2. A forrásütközéseket rétegezett ábrázolás kezeli, nem csendes átnevezés.  
+3. FORRÁS / REKONSTRUÁLT / FiRSTT ÉRTELMEZÉS szigorúan elkülönül.  
+4. A standard matematika és a FiRSTT-specifikus konstrukciók egyértelműen elválnak.  
+5. A `quaternion_v2` négy rétege nem keverhető.  
+6. A szimulációs helyfoglalók csak matematikai illusztrációk.  
+7. A `torsion_product` fizikai értelmezése nyitott / hipotézis.
+"""
+            )
+        else:
+            st.markdown(
+                """
 | Physical quantity | SOURCE | RECONSTRUCTED / UNIFIED | Streamlit / code |
 |-------------------|--------|--------------------------|------------------|
 | \( \\mathbf{A} \) | \( (f,g,h) \) | \( (f_A,g_A,h_A) \) | `A_x, A_y, A_z` |
@@ -535,10 +842,10 @@ FiRSTT mathematical system
 | \( \\rho_e \) | \( \\rho_e \) | \( \\rho_e \) | `rho_e` |
 | \( \\rho \) | \( \\rho \) | \( \\rho \) | `rho` |
 """
-        )
-        st.markdown("#### Key registry rules")
-        st.markdown(
-            """
+            )
+            st.markdown("#### Key registry rules")
+            st.markdown(
+                """
 1. Symbol meaning is not changed from chapter to chapter.  
 2. Source collisions are handled by layered representation, not silent renaming.  
 3. SOURCE / RECONSTRUCTED / FiRSTT INTERPRETATION remain strictly separate.  
@@ -547,20 +854,16 @@ FiRSTT mathematical system
 6. Simulation placeholders are mathematical illustration only.  
 7. `torsion_product` physical interpretation remains open / hypothesis.
 """
-        )
+            )
 
     st.divider()
-    with st.expander("Full markdown source (Symbol Registry)", expanded=False):
+    with st.expander(
+        "Teljes markdown forrás (Szimbólum jegyzék)" if hu
+        else "Full markdown source (Symbol Registry)",
+        expanded=False,
+    ):
         content = load_markdown(SYMBOL_REGISTRY_PATH)
         st.markdown(content)
-
-
-def page_equations() -> None:
-    st.header(t("nav_equations"))
-    st.caption(
-        "Each equation group shows three strictly separated layers: "
-        "**SOURCE** → **RECONSTRUCTED / UNIFIED** → **FiRSTT INTERPRETATION**."
-    )
 
     # ------------------------------------------------------------------
     # Structured equation data (keeps layers explicit and easy to edit)
