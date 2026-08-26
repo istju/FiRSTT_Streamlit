@@ -1239,7 +1239,7 @@ munkásságából és gondolataiból:
 - **Tóth Roland** (LIF Academy)
 - Az idő és a geometria kérdéseit formáló tágabb történeti és fogalmi hatások között
 **Albert Einstein** munkássága (a newtoni abszolút idő meghaladása) és az
-**Einstein–Cartan-elmélet** (a spinhez kapcsolódó téridő-torzió) szintén említést érdemel.
+**Einstein-Cartan-elmélet** (a spinhez kapcsolódó téridő-torzió) szintén említést érdemel.
 Ezek a tágabb tudományos kontextus részeként szerepelnek, nem a jelenlegi rekonstrukció
 kísérleti vagy elméleti igazolásaként.
 
