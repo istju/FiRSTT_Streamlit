@@ -673,24 +673,177 @@ def page_equations() -> None:
 
             st.divider()
 
-            # RECONSTRUCTED layer
+def page_equations() -> None:
+    st.header(t("nav_equations"))
+    lang = st.session_state.get("lang", "en")
+
+    if lang == "hu":
+        st.caption(
+            "Minden egyenletcsoport három szigorúan elválasztott réteget mutat: "
+            "**FORRÁS** → **REKONSTRUÁLT / EGYSÉGES** → **FiRSTT ÉRTELMEZÉS**."
+        )
+    else:
+        st.caption(
+            "Each equation group shows three strictly separated layers: "
+            "**SOURCE** → **RECONSTRUCTED / UNIFIED** → **FiRSTT INTERPRETATION**."
+        )
+
+    # ------------------------------------------------------------------
+    # Structured equation data (bilingual titles & interpretations)
+    # ------------------------------------------------------------------
+    groups = [
+        {
+            "id": "A",
+            "title_en": "A — Total current",
+            "title_hu": "A — Teljes áram",
+            "sim": "SIM-A-01",
+            "components": [
+                (r"p = u + \frac{\partial f}{\partial t}",
+                 "x-component of total current",
+                 "a teljes áram x-komponense"),
+                (r"q = v + \frac{\partial g}{\partial t}",
+                 "y-component of total current",
+                 "a teljes áram y-komponense"),
+                (r"r = w + \frac{\partial h}{\partial t}",
+                 "z-component of total current",
+                 "a teljes áram z-komponense"),
+            ],
+            "reconstructed": r"\mathbf{J}_{\mathrm{total}} = \mathbf{J}_{\mathrm{conduction}} + \frac{\partial\mathbf{D}}{\partial t}",
+            "firstt_en": "Total current is the sum of conduction current and displacement current. Any emphasis on the temporal change of the fields as primary is a hypothesis-level reading.",
+            "firstt_hu": "A teljes áram a vezetési áram és az elmozdulási áram összege. A mezők időbeli változásának elsődlegességére vonatkozó hangsúly hipotézis szintű olvasat.",
+        },
+        {
+            "id": "B",
+            "title_en": "B — Magnetic force",
+            "title_hu": "B — Mágneses erő",
+            "sim": "SIM-B-01",
+            "components": [
+                (r"\mu\alpha = \frac{\partial h}{\partial y} - \frac{\partial g}{\partial z}", "", ""),
+                (r"\mu\beta = \frac{\partial f}{\partial z} - \frac{\partial h}{\partial x}", "", ""),
+                (r"\mu\gamma = \frac{\partial g}{\partial x} - \frac{\partial f}{\partial y}", "", ""),
+            ],
+            "reconstructed": r"\mu\mathbf{H} = \nabla\times\mathbf{A}",
+            "firstt_en": "Magnetic field strength is obtained from the curl of the vector potential. Possible links to torsion remain at hypothesis level.",
+            "firstt_hu": "A mágneses térerősség a vektorpotenciál rotációjából adódik. A torzióval való lehetséges kapcsolat hipotézis szinten marad.",
+        },
+        {
+            "id": "C",
+            "title_en": "C — Ampère–Maxwell law",
+            "title_hu": "C — Ampère–Maxwell törvény",
+            "sim": "SIM-C-01",
+            "components": [
+                (r"\frac{\partial\gamma}{\partial y} - \frac{\partial\beta}{\partial z} = 4\pi p", "", ""),
+                (r"\frac{\partial\alpha}{\partial z} - \frac{\partial\gamma}{\partial x} = 4\pi q", "", ""),
+                (r"\frac{\partial\beta}{\partial x} - \frac{\partial\alpha}{\partial y} = 4\pi r", "", ""),
+            ],
+            "reconstructed": r"\nabla\times\mathbf{H} = 4\pi\mathbf{J}_{\mathrm{total}}",
+            "firstt_en": "The C-source notation already meant total current. In the reconstructed layer the meaning is made explicit as \( \\mathbf{J}_{\\mathrm{total}} \). Original source notation is left unchanged.",
+            "firstt_hu": "A C-forrás jelölése már a teljes áramot jelentette. A rekonstruált rétegben a jelentés explicitté válik: \( \\mathbf{J}_{\\mathrm{total}} \). Az eredeti forrásjelölés változatlan.",
+            "status": "RESOLVED_BY_REPRESENTATION_LAYER",
+        },
+        {
+            "id": "D",
+            "title_en": "D — Electromotive force",
+            "title_hu": "D — Elektromotoros erő",
+            "sim": "SIM-D-01",
+            "components": [
+                (r"P = \mu\Bigl(\gamma\frac{\partial y}{\partial t} - \beta\frac{\partial z}{\partial t}\Bigr) - \frac{\partial f}{\partial t} - \frac{\partial\Psi}{\partial x}", "", ""),
+                (r"Q = \mu\Bigl(\alpha\frac{\partial z}{\partial t} - \gamma\frac{\partial x}{\partial t}\Bigr) - \frac{\partial g}{\partial t} - \frac{\partial\Psi}{\partial y}", "", ""),
+                (r"R = \mu\Bigl(\beta\frac{\partial x}{\partial t} - \alpha\frac{\partial y}{\partial t}\Bigr) - \frac{\partial h}{\partial t} - \frac{\partial\Psi}{\partial z}", "", ""),
+            ],
+            "reconstructed": r"\mathbf{E} = \mu(\mathbf{v}\times\mathbf{H}) - \frac{\partial\mathbf{A}}{\partial t} - \nabla\Psi",
+            "firstt_en": "\( -\\nabla\\Psi \) is treated as a highlighted longitudinal component. This reading is hypothesis-level, not a mathematical consequence of the source.",
+            "firstt_hu": "A \( -\\nabla\\Psi \) kiemelt longitudinális komponensként jelenik meg. Ez hipotézis szintű olvasat, nem a forrás matematikai következménye.",
+        },
+        {
+            "id": "E",
+            "title_en": "E — Electric displacement",
+            "title_hu": "E — Elektromos elmozdulás",
+            "sim": "SIM-E-01",
+            "components": [
+                (r"f = \frac{1}{4\pi k}P", "", ""),
+                (r"g = \frac{1}{4\pi k}Q", "", ""),
+                (r"h = \frac{1}{4\pi k}R", "", ""),
+            ],
+            "reconstructed": r"\mathbf{D} = \frac{1}{4\pi k}\mathbf{E}",
+            "firstt_en": "Source E assigns \( (f,g,h) \) to \( \\mathbf{D} \), while sources A/B/D assign the same letters to \( \\mathbf{A} \). Layered representation resolves the collision. It does **not** claim the original identical lettering was intentional.",
+            "firstt_hu": "Az E forrás a \( (f,g,h) \) betűket a \( \\mathbf{D} \)-hez rendeli, míg az A/B/D források ugyanezeket az \( \\mathbf{A} \)-hoz. A rétegezett ábrázolás feloldja az ütközést. **Nem** állítja, hogy az eredeti azonos betűhasználat szándékos volt.",
+            "status": "RESOLVED_BY_REPRESENTATION_LAYER",
+        },
+        {
+            "id": "F",
+            "title_en": "F — Conduction current / local Ohm’s law",
+            "title_hu": "F — Vezetési áram / lokális Ohm-törvény",
+            "sim": "SIM-F-01",
+            "components": [
+                (r"P = \rho u", "", ""),
+                (r"Q = \rho v", "", ""),
+                (r"R = \rho w", "", ""),
+            ],
+            "reconstructed": r"\mathbf{E} = \rho\,\mathbf{J}_{\mathrm{conduction}}",
+            "firstt_en": "Local Ohm’s law. Any deeper reading of material parameters remains at hypothesis level.",
+            "firstt_hu": "Lokális Ohm-törvény. Az anyagi paraméterek mélyebb olvasata hipotézis szinten marad.",
+        },
+        {
+            "id": "G",
+            "title_en": "G — Gauss’s law",
+            "title_hu": "G — Gauss-törvény",
+            "sim": "SIM-G-01",
+            "components": [
+                (r"\frac{\partial f}{\partial x} + \frac{\partial g}{\partial y} + \frac{\partial h}{\partial z} = \rho_e", "", ""),
+            ],
+            "reconstructed": r"\nabla\cdot\mathbf{D} = \rho_e",
+            "firstt_en": "Divergence law. Possible links between charge density and the temporal origin of the fields remain hypothesis-level.",
+            "firstt_hu": "Divergencia-törvény. A töltéssűrűség és a mezők időbeli eredete közötti lehetséges kapcsolat hipotézis szinten marad.",
+        },
+        {
+            "id": "H",
+            "title_en": "H — Continuity equation",
+            "title_hu": "H — Folytonossági egyenlet",
+            "sim": "SIM-H-01",
+            "components": [
+                (r"\frac{\partial\rho_e}{\partial t} + \frac{\partial u}{\partial x} + \frac{\partial v}{\partial y} + \frac{\partial w}{\partial z} = 0", "", ""),
+            ],
+            "reconstructed": r"\frac{\partial\rho_e}{\partial t} + \nabla\cdot\mathbf{J}_{\mathrm{conduction}} = 0",
+            "firstt_en": "Expresses charge conservation. Any reading that privileges the primacy of time over spatial divergence is hypothesis-level.",
+            "firstt_hu": "A töltésmegmaradást fejezi ki. Az idő elsődlegességét a térbeli divergenciával szemben hangsúlyozó olvasat hipotézis szintű.",
+        },
+    ]
+
+    for g in groups:
+        title = g["title_hu"] if lang == "hu" else g["title_en"]
+        with st.expander(f"**{title}**  ·  `{g['sim']}`", expanded=False):
+            st.markdown(f"#### {t('layer_source')}")
+            for item in g["components"]:
+                latex, role_en, role_hu = item
+                st.latex(latex)
+                role = role_hu if lang == "hu" else role_en
+                if role:
+                    st.caption(role)
+
+            st.divider()
+
             st.markdown(f"#### {t('layer_reconstructed')}")
             st.latex(g["reconstructed"])
 
             st.divider()
 
-            # FiRSTT layer
             st.markdown(f"#### {t('layer_firstt')}")
-            st.markdown(g["firstt"])
+            st.markdown(g["firstt_hu"] if lang == "hu" else g["firstt_en"])
 
             if g.get("status"):
-                st.info(f"**Status:** {g['status']}")
+                status_label = "Állapot" if lang == "hu" else "Status"
+                st.info(f"**{status_label}:** {g['status']}")
 
     st.divider()
-    with st.expander("Full markdown source (Equation Registry)", expanded=False):
+    full_label = (
+        "Teljes markdown forrás (Egyenlet jegyzék)"
+        if lang == "hu"
+        else "Full markdown source (Equation Registry)"
+    )
+    with st.expander(full_label, expanded=False):
         content = load_markdown(EQUATION_REGISTRY_PATH)
         st.markdown(content)
-
 
 def page_simulations() -> None:
     st.header(t("nav_simulations"))
