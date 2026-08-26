@@ -792,12 +792,12 @@ FiRSTT mathematical system
     # 12-13. Summary table & rules
     # ------------------------------------------------------------------
     with st.expander(
-        "12-13. Osszefoglalo jelolesi tablazat es jegyzekszabalyok" if hu
+        "12-13. Összefoglaló jelölési táblázat es jegyzékszabályok" if hu
         else "12-13. Summary notation table & registry rules",
         expanded=False,
     ):
         st.markdown(
-            "#### Osszefoglalo tablazat" if hu else "#### Summary table"
+            "#### Összefoglaló táblázat" if hu else "#### Summary table"
         )
         if hu:
             st.markdown(
