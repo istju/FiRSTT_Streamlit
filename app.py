@@ -503,8 +503,8 @@ def page_symbols() -> None:
     # 4. Electric displacement D
     # ------------------------------------------------------------------
     with st.expander(
-        "4. Elektromos elmozdulás \( \\mathbf{D} \)" if hu
-        else "4. Electric displacement \( \\mathbf{D} \)",
+        "4. Elektromos elmozdulás **D**" if hu
+        else "4. Electric displacement **D**",
         expanded=False,
     ):
         st.markdown("**Block ID:** `SYM-D`")
