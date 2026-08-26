@@ -806,8 +806,8 @@ FiRSTT mathematical system
 |-------------------|--------|--------------------------|------------------|
 | \( \\mathbf{A} \) | \( (f,g,h) \) | \( (f_A,g_A,h_A) \) | `A_x, A_y, A_z` |
 | \( \\mathbf{D} \) | \( (f,g,h) \) | \( (f_D,g_D,h_D) \) | `D_x, D_y, D_z` |
-| \( \\mathbf{J}_{\\mathrm{conduction}} \) | \( (u,v,w) \) | \( (u,v,w) \) | `J_cond_x, …` |
-| \( \\mathbf{J}_{\\mathrm{total}} \) | \( (p,q,r) \) | \( (p,q,r) \) | `J_total_x, …` |
+| \( \\mathbf{J}_{\\mathrm{conduction}} \) | \( (u,v,w) \) | \( (u,v,w) \) | `J_cond_x, ...` |
+| \( \\mathbf{J}_{\\mathrm{total}} \) | \( (p,q,r) \) | \( (p,q,r) \) | `J_total_x, ...` |
 | \( \\mathbf{E} \) | \( (P,Q,R) \) | \( (P,Q,R) \) | `E_x, E_y, E_z` |
 | \( \\mathbf{H} \) | \( (\\alpha,\\beta,\\gamma) \) | \( (\\alpha,\\beta,\\gamma) \) | `H_x, H_y, H_z` |
 | \( \\Psi \) | \( \\Psi \) | \( \\Psi \) | `Psi` |
@@ -849,8 +849,8 @@ FiRSTT mathematical system
 |-------------------|--------|--------------------------|------------------|
 | **A** (vektorpotenciál) | (f, g, h) | (f_A, g_A, h_A) | `A_x, A_y, A_z` |
 | **D** (elektromos elmozdulás) | (f, g, h) | (f_D, g_D, h_D) | `D_x, D_y, D_z` |
-| **J_conduction** (vezetési áram) | (u, v, w) | (u, v, w) | `J_cond_x, …` |
-| **J_total** (teljes áram) | (p, q, r) | (p, q, r) | `J_total_x, …` |
+| **J_conduction** (vezetési áram) | (u, v, w) | (u, v, w) | `J_cond_x, ...` |
+| **J_total** (teljes áram) | (p, q, r) | (p, q, r) | `J_total_x, ...` |
 | **E** (elektromos térerősség) | (P, Q, R) | (P, Q, R) | `E_x, E_y, E_z` |
 | **H** (mágneses térerősség) | (α, β, γ) | (α, β, γ) | `H_x, H_y, H_z` |
 | **Ψ** (skalárpotenciál) | Ψ | Ψ | `Psi` |
