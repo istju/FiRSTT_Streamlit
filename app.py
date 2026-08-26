@@ -1246,7 +1246,7 @@ kísérleti vagy elméleti igazolásaként.
 Munkájuk segített formálni a projektben vizsgált kérdéseket és irányokat.
 
 A Maxwell-egyenletek rétegezett rekonstrukciója
-(FORRÁS → REKONSTRUÁLT → FiRSTT ÉRTELMEZÉS) önálló matematikai és fogalmi munka;
+(FORRÁS -> REKONSTRUÁLT -> FiRSTT ÉRTELMEZÉS) önálló matematikai és fogalmi munka;
 nem állítja a fenti szerzők támogatását, és nem kísérleti igazolásként jelenik meg.
 """
         )
