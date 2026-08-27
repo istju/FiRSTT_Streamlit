@@ -264,7 +264,7 @@ k = \frac{1}{\varepsilon}
 $$
 
 **FiRSTT INTERPRETATION**  
-Source E assigns (f,g,h) to **D**, while sources A/B/D assign the same letters to **A**.  
+Source E assigns $(f,g,h)$ to $\mathbf{D}$, while sources A/B/D assign the same letters to $\mathbf{A}$.    
 Layered representation resolves the collision for display and computation.  
 It does **not** claim that the original identical lettering was intentional.
 
