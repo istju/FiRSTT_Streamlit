@@ -549,11 +549,11 @@ def page_symbols() -> None:
         st.markdown("**Block ID:** `SYM-J-TOTAL`")
         st.markdown(f"**{t('layer_source')}**")
         if hu:
-            st.markdown("- A csoport: J_total = (p, q, r)")
-            st.markdown("- C csoport: J = (p, q, r)" (a szöveg teljes áramként azonosítja)")
+            st.markdown("- A csoport: **J_total = (p, q, r)**")
+            st.markdown("- C csoport: **J = (p, q, r)**" (a szöveg teljes áramként azonosítja)")
         else:
-            st.markdown("- Group A: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
-            st.markdown("- Group C: \( \\mathbf{J} = (p, q, r) \) (text identifies it as total current)")
+            st.markdown("- Group A: **J_total = (p, q, r)**")
+            st.markdown("- Group C: **J = (p, q, r)** (text identifies it as total current)")
         st.markdown(f"**{t('layer_reconstructed')}**")
         st.latex(r"\mathbf{J}_{\mathrm{total}} = (p, q, r)")
         st.caption("Streamlit / code: `J_total_x, J_total_y, J_total_z`")
