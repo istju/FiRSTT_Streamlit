@@ -1068,8 +1068,8 @@ def page_equations() -> None:
                 (r"h = \frac{1}{4\pi k}R", "", ""),
             ],
             "reconstructed": r"\mathbf{D} = \frac{1}{4\pi k}\mathbf{E}",
-            "firstt_en": "Source E assigns \( (f,g,h) \) to \( \\mathbf{D} \), while sources A/B/D assign the same letters to \( \\mathbf{A} \). Layered representation resolves the collision. It does **not** claim the original identical lettering was intentional.",
-            "firstt_hu": "Az E forrás a \( (f,g,h) \) betűket a \( \\mathbf{D} \)-hez rendeli, míg az A/B/D források ugyanezeket az \( \\mathbf{A} \)-hoz. A rétegezett ábrázolás feloldja az ütközést. **Nem** állítja, hogy az eredeti azonos betűhasználat szándékos volt.",
+            "firstt_en": "Source E assigns (f,g,h)  to **D**, while sources A/B/D assign the same letters to **A**. Layered representation resolves the collision. It does **not** claim the original identical lettering was intentional.",
+            "firstt_hu": "Az E forrás a (f,g,h)  betűket a **D**-hez rendeli, míg az A/B/D források ugyanezeket az **A**-hoz. A rétegezett ábrázolás feloldja az ütközést. **Nem** állítja, hogy az eredeti azonos betűhasználat szándékos volt.",
             "status": "RESOLVED_BY_REPRESENTATION_LAYER",
         },
         {
