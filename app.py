@@ -601,10 +601,10 @@ def page_symbols() -> None:
                 """
 | Szimbólum | Jelentés | Megjegyzés |
 |-----------|----------|------------|
-| \( \\mu \) | mágneses permeabilitás | |
-| \( k \) | \( k = 1/\\varepsilon \) | \( \\mathbf{D} = \\frac{1}{4\\pi k}\\mathbf{E} \) |
-| \( \\rho \) | fajlagos ellenállás | \( \\mathbf{E} = \\rho\\,\\mathbf{J}_{\\mathrm{conduction}} \) |
-| \( \\rho_e \) | szabad töltéssűrűség | elkülönül a \( \\rho \)-tól |
+| **mu** | mágneses permeabilitás | |
+| **k** | **k = 1/eps | **D = E / (4*pi*k)** |
+| **rho** | fajlagos ellenállás | **E = rho * J_conduction** |
+| **rho_e** | szabad töltéssűrűség | elkülönül a **rho**-tól |
 """
             )
             st.caption("A `rho` és `rho_e` kódban és tipográfiában is legyen egyértelműen elválasztva.")
@@ -613,10 +613,10 @@ def page_symbols() -> None:
                 """
 | Symbol | Meaning | Notes |
 |--------|---------|-------|
-| \( \\mu \) | magnetic permeability | |
-| \( k \) | \( k = 1/\\varepsilon \) | used in \( \\mathbf{D} = \\frac{1}{4\\pi k}\\mathbf{E} \) |
-| \( \\rho \) | resistivity | used in \( \\mathbf{E} = \\rho\\,\\mathbf{J}_{\\mathrm{conduction}} \) |
-| \( \\rho_e \) | free charge density | distinct from \( \\rho \) |
+| **mu** | magnetic permeability | |
+| **k** | **k = 1/eps | **D = E / (4*pi*k)** |
+| **rho** | resistivity | **E = rho * J_conduction** |
+| **rho_e** | free charge density | distinct from **rho** |
 """
             )
             st.caption("Keep `rho` and `rho_e` clearly separated in code and typography.")
