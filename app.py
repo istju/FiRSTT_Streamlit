@@ -550,7 +550,7 @@ def page_symbols() -> None:
         st.markdown(f"**{t('layer_source')}**")
         if hu:
             st.markdown("- A csoport: **J_total = (p, q, r)**")
-            st.markdown("- C csoport: **J = (p, q, r)**" (a szöveg teljes áramként azonosítja)")
+            st.markdown("- C csoport: **J = (p, q, r)** (a szöveg teljes áramként azonosítja)")
         else:
             st.markdown("- Group A: **J_total = (p, q, r)**")
             st.markdown("- Group C: **J = (p, q, r)** (text identifies it as total current)")
