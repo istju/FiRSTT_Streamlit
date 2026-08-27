@@ -515,11 +515,11 @@ def page_symbols() -> None:
         st.caption("Streamlit / code: `D_x, D_y, D_z`")
         st.markdown(f"**{t('layer_firstt')}**")
         st.markdown(
-            "A forrásanyag ugyanazokat az \( f,g,h \) betűket használta az \( \\mathbf{A} \)-hoz és a \( \\mathbf{D} \)-hez. "
+            "A forrásanyag ugyanazokat az \( f,g,h \) betűket használta az **A**-hoz és a **D**-hez. "
             "A rétegezett ábrázolás feloldja az ütközést a számítás és a megjelenítés számára. "
             "**Nem** állítja, hogy az eredeti azonos betűhasználat szándékos volt."
             if hu else
-            "The source material used the same letters \( f,g,h \) for both \( \\mathbf{A} \) and \( \\mathbf{D} \). "
+            "The source material used the same letters \( f,g,h \) for both **A** and **D**. "
             "Layered representation resolves the collision for computation and display. "
             "It does **not** claim that the original identical lettering was intentional."
         )
