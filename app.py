@@ -1054,8 +1054,8 @@ def page_equations() -> None:
                 (r"R = \mu\Bigl(\beta\frac{\partial x}{\partial t} - \alpha\frac{\partial y}{\partial t}\Bigr) - \frac{\partial h}{\partial t} - \frac{\partial\Psi}{\partial z}", "", ""),
             ],
             "reconstructed": r"\mathbf{E} = \mu(\mathbf{v}\times\mathbf{H}) - \frac{\partial\mathbf{A}}{\partial t} - \nabla\Psi",
-            "firstt_en": "\( -\\nabla\\Psi \) is treated as a highlighted longitudinal component. This reading is hypothesis-level, not a mathematical consequence of the source.",
-            "firstt_hu": "A \( -\\nabla\\Psi \) kiemelt longitudinális komponensként jelenik meg. Ez hipotézis szintű olvasat, nem a forrás matematikai következménye.",
+            "firstt_en": "**Psi** is treated as a highlighted longitudinal component. This reading is hypothesis-level, not a mathematical consequence of the source.",
+            "firstt_hu": "A **Psi** kiemelt longitudinális komponensként jelenik meg. Ez hipotézis szintű olvasat, nem a forrás matematikai következménye.",
         },
         {
             "id": "E",
