@@ -469,22 +469,22 @@ def page_symbols() -> None:
 
         st.divider()
         st.markdown(
-            "#### 3.2 Skalárpotenciál \( \\Psi \)" if hu
-            else "#### 3.2 Scalar potential \( \\Psi \)"
+            "#### 3.2 Skalárpotenciál **Psi**" if hu
+            else "#### 3.2 Scalar potential **Psi**"
         )
         st.markdown("**Block ID:** `SYM-PSI`")
         st.latex(r"\Psi")
         st.caption("Streamlit / code: `Psi`")
         st.markdown(
-            "A \( -\\nabla\\Psi \) kiemelt longitudinális komponensként jelenik meg (hipotézis szintű olvasat)."
+            "A **Psi** kiemelt longitudinális komponensként jelenik meg (hipotézis szintű olvasat)."
             if hu else
-            "\( -\\nabla\\Psi \) appears as a highlighted longitudinal component (hypothesis-level reading)."
+            "**Psi** appears as a highlighted longitudinal component (hypothesis-level reading)."
         )
 
         st.divider()
         st.markdown(
-            "#### 3.3 Elektromos térerősség \( \\mathbf{E} \)" if hu
-            else "#### 3.3 Electric field \( \\mathbf{E} \)"
+            "#### 3.3 Elektromos térerősség **(E)**" if hu
+            else "#### 3.3 Electric field **(E)**"
         )
         st.markdown("**Block ID:** `SYM-E`")
         st.latex(r"\mathbf{E} = (P, Q, R)")
@@ -492,8 +492,8 @@ def page_symbols() -> None:
 
         st.divider()
         st.markdown(
-            "#### 3.4 Mágneses térerősség \( \\mathbf{H} \)" if hu
-            else "#### 3.4 Magnetic field \( \\mathbf{H} \)"
+            "#### 3.4 Mágneses térerősség **(H)**" if hu
+            else "#### 3.4 Magnetic field **(H)**"
         )
         st.markdown("**Block ID:** `SYM-H`")
         st.latex(r"\mathbf{H} = (\alpha, \beta, \gamma)")
@@ -549,8 +549,8 @@ def page_symbols() -> None:
         st.markdown("**Block ID:** `SYM-J-TOTAL`")
         st.markdown(f"**{t('layer_source')}**")
         if hu:
-            st.markdown("- A csoport: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
-            st.markdown("- C csoport: \( \\mathbf{J} = (p, q, r) \) (a szöveg teljes áramként azonosítja)")
+            st.markdown("- A csoport: J_total = (p, q, r)")
+            st.markdown("- C csoport: J = (p, q, r)" (a szöveg teljes áramként azonosítja)")
         else:
             st.markdown("- Group A: \( \\mathbf{J}_{\\mathrm{total}} = (p, q, r) \)")
             st.markdown("- Group C: \( \\mathbf{J} = (p, q, r) \) (text identifies it as total current)")
