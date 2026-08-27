@@ -563,11 +563,11 @@ def page_symbols() -> None:
         st.markdown(f"**{t('layer_firstt')}**")
         st.markdown(
             "A C-forrás jelölése már a teljes áramot jelentette. "
-            "A rekonstruált rétegben a jelentés explicitté válik: \( \\mathbf{J}_{\\mathrm{total}} \). "
+            "A rekonstruált rétegben a jelentés explicitté válik: **J_total**. "
             "Az eredeti forrásjelölés változatlan."
             if hu else
             "The C-source notation already meant total current. "
-            "In the reconstructed layer the meaning is made explicit as \( \\mathbf{J}_{\\mathrm{total}} \). "
+            "In the reconstructed layer the meaning is made explicit as **J_total**. "
             "Original source notation is left unchanged."
         )
         st.info(
