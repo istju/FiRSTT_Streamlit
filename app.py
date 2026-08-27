@@ -1039,8 +1039,8 @@ def page_equations() -> None:
                 (r"\frac{\partial\beta}{\partial x} - \frac{\partial\alpha}{\partial y} = 4\pi r", "", ""),
             ],
             "reconstructed": r"\nabla\times\mathbf{H} = 4\pi\mathbf{J}_{\mathrm{total}}",
-            "firstt_en": "The C-source notation already meant total current. In the reconstructed layer the meaning is made explicit as \( \\mathbf{J}_{\\mathrm{total}} \). Original source notation is left unchanged.",
-            "firstt_hu": "A C-forrás jelölése már a teljes áramot jelentette. A rekonstruált rétegben a jelentés explicitté válik: \( \\mathbf{J}_{\\mathrm{total}} \). Az eredeti forrásjelölés változatlan.",
+            "firstt_en": "The C-source notation already meant total current. In the reconstructed layer the meaning is made explicit as **J_total**. Original source notation is left unchanged.",
+            "firstt_hu": "A C-forrás jelölése már a teljes áramot jelentette. A rekonstruált rétegben a jelentés explicitté válik: **J_total**. Az eredeti forrásjelölés változatlan.",
             "status": "RESOLVED_BY_REPRESENTATION_LAYER",
         },
         {
