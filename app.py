@@ -449,8 +449,8 @@ def page_symbols() -> None:
         expanded=False,
     ):
         st.markdown(
-            "#### 3.1 Vektorpotenciál \( \\mathbf{A} \)" if hu
-            else "#### 3.1 Vector potential \( \\mathbf{A} \)"
+            "#### 3.1 Vektorpotenciál **(A)**" if hu
+            else "#### 3.1 Vector potential **(A)**"
         )
         st.markdown("**Block ID:** `SYM-A`")
         st.markdown(f"**{t('layer_source')}**")
