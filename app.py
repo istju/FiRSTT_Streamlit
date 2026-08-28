@@ -690,11 +690,14 @@ def page_symbols() -> None:
             else "Reference: `quaternion_v2.py` / `src/quaternion.py`"
         )
 
-        st.markdown(
-            "#### 11.1 Standard matematikai réteg Hamilton (<span style='font-size: 1.3em; line-height: 0;'>ℍ</span>)" if hu
-            else "#### 11.1 Standard mathematical layer (Hamilton ℍ )"
-            unsafe_allow_html=True
-        )
+       header_text = (
+    "#### 11.1 Standard matematikai réteg Hamilton (<span style='font-size: 1.3em; line-height: 0;'>ℍ</span>)"
+    if hu
+    else "#### 11.1 Standard mathematical layer (Hamilton <span style='font-size: 1.3em; line-height: 0;'>ℍ</span>)"
+   )
+
+        st.markdown(header_text, unsafe_allow_html=True)
+
         st.latex(r"q = w + xi + yj + zk")
         st.markdown(
             "Műveletek: összeadás, Hamilton-szorzat, konjugált, norma, inverz, forgatásreprezentáció. "
