@@ -691,7 +691,7 @@ def page_symbols() -> None:
         )
 
         st.markdown(
-            "#### 11.1 Standard matematikai réteg (Hamilton \u210D\n)" if hu
+            "#### 11.1 Standard matematikai réteg Hamilton (\u210D\n)" if hu
             else "#### 11.1 Standard mathematical layer (Hamilton **H**)"
         )
         st.latex(r"q = w + xi + yj + zk")
