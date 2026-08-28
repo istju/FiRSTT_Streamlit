@@ -695,7 +695,6 @@ def page_symbols() -> None:
             else "#### 11.1 Standard mathematical layer (Hamilton ℍ )"
         )
 
-        st.markdown(header_text, unsafe_allow_html=True)
 
         st.latex(r"q = w + xi + yj + zk")
         st.markdown(
