@@ -661,7 +661,7 @@ def page_symbols() -> None:
 | Idő mint forrás | Hipotézis | A projekt központi hipotézise |
 | Torzió | Nyitott matematikai definíció | Később expliciten definiálandó |
 | Spin | A kvaternió vektorrészéhez kötve | Geometriai / spin-szerű struktúra |
-| Longitudinális komponens | \( -\\nabla\\Psi \) kiemelve | Hipotézis szintű olvasat |
+| Longitudinális komponens | **Psi** kiemelve | Hipotézis szintű olvasat |
 """
             )
         else:
